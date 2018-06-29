@@ -3,8 +3,8 @@ import store from '@/store'
 
 describe('CryptoCompare Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
-    store.dispatch('network/setToken', 'ARK')
+    store.dispatch('network/setServer', 'http://13.56.163.57:9030/api')
+    store.dispatch('network/setToken', 'BPL')
     store.dispatch('currency/setName', 'USD')
   })
 
@@ -39,7 +39,7 @@ describe('CryptoCompare Service', () => {
   })
 
   it('should return year values, even if token matches currency', async () => {
-    store.dispatch('currency/setName', 'ARK')
+    store.dispatch('currency/setName', 'BPL')
     const data = await cryptoCompareService.year()
     expect(data.labels.length).toBeGreaterThanOrEqual(366)
     expect(data.datasets.length).toBeGreaterThanOrEqual(366)

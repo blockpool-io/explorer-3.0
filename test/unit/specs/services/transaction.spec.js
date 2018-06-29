@@ -17,7 +17,7 @@ const blockPropertyArray = [
 
 describe('Transaction Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
+    store.dispatch('network/setServer', 'http://13.56.163.57:9030/api')
   })
 
   it('should return the latest transactions ordered by timestamp descending', async () => {
@@ -28,8 +28,8 @@ describe('Transaction Service', () => {
   })
 
   it('should find a transaction by its id', async () => {
-    const data = await transactionService.find('bd8a71caeeab36339ac5baf832bb0e150549629c1992dc749a79ff3cdcd449fc')
-    expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(blockPropertyArray.concat(['height', 'votes']).sort()))
+    const data = await transactionService.find('7efc7dbadfa439a6e21a2bce3d3bbaf63236db92948d33bb241b57fbf6713ce0')
+    expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(blockPropertyArray.concat(['height', 'asset', 'recipientId', 'votes']).sort()))
   })
 
   it('should fail if no transaction can be found for given id', async () => {
@@ -37,18 +37,18 @@ describe('Transaction Service', () => {
   })
 
   it('should return the transactions for a given block', async () => {
-    const data = await transactionService.findByBlock('8034780571166969612')
+    const data = await transactionService.findByBlock('385055378853538872')
     expect(data).toHaveLength(1)
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
   })
 
   it('should return no transactions if offset is larger than the amount of transactions', async () => {
-    const data = await transactionService.findByBlock('8034780571166969612', 2)
+    const data = await transactionService.findByBlock('11217043835834306811', 25)
     expect(data).toHaveLength(0)
   })
 
   it('should return and empty list if no transactions in a block', async () => {
-    const data = await transactionService.findByBlock('7818295669546141032')
+    const data = await transactionService.findByBlock('1736798214896808157')
     expect(data).toHaveLength(0)
   })
 
@@ -74,72 +74,72 @@ describe('Transaction Service', () => {
   })
 
   it('should return all transactions for an address', async () => {
-    const data = await transactionService.allByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
+    const data = await transactionService.allByAddress('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq')
     expect(data).toHaveLength(25)
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
 
   it('should return all transactions for an address, with offset', async () => {
-    const data = await transactionService.allByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs', 3, 40)
+    const data = await transactionService.allByAddress('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq', 1, 40)
     expect(data).toHaveLength(40)
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
 
   it('should fail when searching for transactions if address does not exist', async () => {
-    await expect(transactionService.allByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
+    await expect(transactionService.allByAddress('ffffffffffffffffffffffffffffffffff')).rejects.toThrow()
   })
 
   it('should return all outgoing transactions for an address', async () => {
-    const data = await transactionService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
+    const data = await transactionService.sentByAddress('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq')
     expect(data).toHaveLength(25)
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
 
   it('should return all outgoing transactions for an address, with offset', async () => {
-    const data = await transactionService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs', 3, 40)
+    const data = await transactionService.sentByAddress('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq', 1, 40)
     expect(data).toHaveLength(40)
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
 
   it('should fail when searching for outgoing transactions if address does not exist', async () => {
-    await expect(transactionService.sentByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
+    await expect(transactionService.sentByAddress('ffffffffffffffffffffffffffffffffff')).rejects.toThrow()
   })
 
   it('should return all incoming transactions for an address', async () => {
-    const data = await transactionService.receivedByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK')
+    const data = await transactionService.receivedByAddress('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq')
     expect(data).toHaveLength(25)
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
 
   it('should return all incoming transactions for an address, with offset', async () => {
-    const data = await transactionService.receivedByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 3, 40)
+    const data = await transactionService.receivedByAddress('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq', 1, 40)
     expect(data).toHaveLength(40)
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
 
   it('should fail when searching for incoming transactions if address does not exist', async () => {
-    await expect(transactionService.receivedByAddress('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gz')).rejects.toThrow()
+    await expect(transactionService.receivedByAddress('ffffffffffffffffffffffffffffffffff')).rejects.toThrow()
   })
 
   it('should return count of outgoing transactions for an address', async () => {
-    const data = await transactionService.sentByAddressCount('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK')
+    const data = await transactionService.sentByAddressCount('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq')
     expect(Number(data)).toBeGreaterThan(0)
   })
 
   it('should return count of incoming transactions for an address', async () => {
-    const data = await transactionService.receivedByAddressCount('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK')
+    const data = await transactionService.receivedByAddressCount('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq')
     expect(Number(data)).toBeGreaterThan(0)
   })
 
   it('should return count of transactions in given block', async () => {
-    const data = await transactionService.findByBlockCount('14744703911220072486')
-    expect(Number(data)).toBe(1)
+    const data = await transactionService.findByBlockCount('11217043835834306811')
+    expect(Number(data)).toBe(202)
   })
 
   it('should return latest transactions with offset', async() => {
@@ -157,14 +157,14 @@ describe('Transaction Service', () => {
   })
 
   it('should return latest transactions for an address with offset', async() => {
-    const data = await transactionService.paginateByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 0)
+    const data = await transactionService.paginateByAddress('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq', 0)
     expect(data).toHaveLength(25)
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)
   })
 
   it('should return latest transactions for an address with offset and given limit', async() => {
-    const data = await transactionService.paginateByAddress('AUexKjGtgsSpVzPLs6jNMM6vJ6znEVTQWK', 2, 40)
+    const data = await transactionService.paginateByAddress('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq', 1, 40)
     expect(data).toHaveLength(40)
     expect(Object.keys(data[0]).sort()).toEqual(expect.arrayContaining(blockPropertyArray))
     expect(data[0].timestamp < data[1].timestamp)

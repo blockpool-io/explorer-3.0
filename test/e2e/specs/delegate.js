@@ -7,7 +7,7 @@
 module.exports = {
   // Default test, which also serves as setup for correct url
   'delegate wallet summary page should be available': function (browser) {
-    const devServer = browser.globals.devServerURL + '/#/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ'
+    const devServer = browser.globals.devServerURL + '/#/wallets/BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq'
 
     browser
       .url(devServer)
@@ -93,11 +93,11 @@ module.exports = {
       .click("//a[contains(@href, '/blocks/1') and text() = 'See all']")
       .waitForElementVisible("//h1[text() = 'Blocks']")
     browser
-      .assert.urlContains('/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ/blocks/1')
+      .assert.urlContains('/wallets/BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq/blocks/1')
   },
 
   'it should be possible to show the list of voters': function (browser) {
-    const devServer = browser.globals.devServerURL + '/#/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ'
+    const devServer = browser.globals.devServerURL + '/#/wallets/BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq'
 
     browser
       .url(devServer)
@@ -106,7 +106,7 @@ module.exports = {
       .click("//a[contains(@href, '/voters/1') and text() = 'See all']")
       .waitForElementVisible("//h1[contains(text(), 'Voters')]")
     browser
-      .assert.urlContains('/wallets/ARAq9nhjCxwpWnGKDgxveAJSijNG8Y6dFQ/voters/1')
+      .assert.urlContains('/wallets/BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq/voters/1')
     browser.end()
   }
 }

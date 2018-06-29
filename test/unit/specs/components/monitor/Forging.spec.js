@@ -22,7 +22,7 @@ describe('monitor/Forging', () => {
       modules: {
         network: {
           namespaced: true,
-          getters: { activeDelegates: state => 51 }
+          getters: { activeDelegates: state => 201 }
         }
       },
       strict: true

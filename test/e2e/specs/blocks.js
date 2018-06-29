@@ -66,7 +66,7 @@ module.exports = {
       .useXpath()
       .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[1]//a[1]")
       .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[1]//a[1]")
-      .pause(500)
+      .pause(1000)
     browser
       .useCss()
       .waitForElementVisible('main.theme-light')

@@ -7,7 +7,7 @@
 module.exports = {
   // Default test, which also serves as setup for correct url
   'block detail page should be available': function (browser) {
-    const devServer = browser.globals.devServerURL + '/#/block/3487084709104787070'
+    const devServer = browser.globals.devServerURL + '/#/block/11217043835834306811'
 
     browser
       .url(devServer)
@@ -18,16 +18,18 @@ module.exports = {
 
   'it should be possible to navigate to next block and back': function(browser) {
     browser
-      .assert.containsText('div.semibold.truncate span', '3487084709104787070')
+      .assert.containsText('div.semibold.truncate span', '11217043835834306811')
       .useXpath().click("//button[contains(., 'Next')]")
-      .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '12152817243754268433')]")
+      .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '1736798214896808157')]")
     browser
       .useXpath().click("//button[contains(., 'Previous')]")
-      .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '3487084709104787070')]")
+      .waitForElementVisible("//div[contains(@class, 'semibold') and contains(@class, 'truncate')]/span[contains(text(), '11217043835834306811')]")
   },
 
   'it should not contain a transaction table if block has no transactions': function(browser) {
     browser
+      .url(browser.globals.devServerURL + '/#/block/1736798214896808157')
+      .pause(500)
       .useXpath().assert.containsText("//div[.='Transactions']/following-sibling::div[1]", '0')
     browser
       .useCss().expect.element('h2').to.not.be.present
@@ -38,16 +40,15 @@ module.exports = {
 
   'it should contain a transaction table if block has 1 or more transactions': function(browser) {
     browser
-      .url(browser.globals.devServerURL + '/#/block/12287662939647858585')
+      .url(browser.globals.devServerURL + '/#/block/11217043835834306811')
       .pause(500)
       .waitForElementVisible('div.table-component')
-      .useXpath().assert.containsText("//div[.='Transactions']/following-sibling::div[1]", '1')
       .useCss().expect.element('h2').to.be.present
     browser
       .expect.element('div.table-component').to.be.present
     browser
       .elements('css selector', '.table-component__table__body tr', function(result) {
-        browser.assert.equal(1, result.value.length)
+        browser.assert.equal(25, result.value.length)
       })
   },
 
@@ -61,10 +62,11 @@ module.exports = {
 
   'it should be possible to click on the delegate': function(browser) {
     browser
+      .url(browser.globals.devServerURL + '/#/block/1736798214896808157')
       .waitForElementVisible('div.list-row a')
       .click('div.list-row a')
       .useXpath().waitForElementVisible("//h1[text() = 'Wallet Summary']")
-      .assert.urlContains('wallets/ALLZ3TQKTaHm2Bte4SrXL9C5cS8ZovqFfZ')
+      .assert.urlContains('wallets/BFrwD4Fx94cwbsUjiUirsBbSNj5jAgmhEX')
       .end()
   }
 }

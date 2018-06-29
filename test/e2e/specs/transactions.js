@@ -86,7 +86,7 @@ module.exports = {
       .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[3]//a[1]")
     browser
       .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[3]//a[1]")
-      .pause(500)
+      .pause(1000)
     browser
       .useCss()
       .waitForElementVisible('main.theme-light')
