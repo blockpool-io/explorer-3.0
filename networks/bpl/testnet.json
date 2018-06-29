@@ -1,8 +1,8 @@
 {
-  "title": "DARK Explorer",
-  "server": "https://dexplorer.ark.io:8443/api",
-  "alias": "Development",
-  "activeDelegates": 51,
+  "title": "tBPL Explorer",
+  "server": "35.180.64.83:9029/api",
+  "alias": "Testnet",
+  "activeDelegates": 201,
   "rewardOffset": 75600,
   "currencies": [],
   "knownWallets": {},

@@ -27,14 +27,14 @@ class CryptoCompareService {
     const date = Math.round(new Date().getTime() / 1000)
 
     let targetCurrency = 'USD'
-    if (store.getters['currency/name'] !== store.getters['network/token']) {
+    if (store.getters['currency/name'] !== store.getters['network/tokenShortName']) {
       targetCurrency = store.getters['currency/name']
     }
 
     const response = await axios
       .get(`https://min-api.cryptocompare.com/data/histo${type}`, {
         params: {
-          fsym: store.getters['network/token'],
+          fsym: store.getters['network/tokenShortName'],
           tsym: targetCurrency,
           toTs: date,
           limit

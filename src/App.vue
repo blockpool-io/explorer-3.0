@@ -31,7 +31,7 @@ export default {
   }),
 
   async created() {
-    const network = require(`../networks/${process.env.EXPLORER_CONFIG}`)
+    const network = require(`../networks/${process.env.TICKER_CONFIG}/${process.env.EXPLORER_CONFIG}`)
 
     this.$store.dispatch('network/setDefaults', network)
 
@@ -56,6 +56,7 @@ export default {
 
     const response = await LoaderService.config()
     this.$store.dispatch('network/setToken', response.token)
+    this.$store.dispatch('network/setTokenShortName', 'BPL')
     this.$store.dispatch('network/setSymbol', response.symbol)
     this.$store.dispatch('network/setNethash', response.nethash)
 

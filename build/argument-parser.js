@@ -12,7 +12,8 @@ module.exports = (env) => {
   args.port = (env.port && Number(env.port)) || (process.env.PORT && Number(process.env.PORT))
   args.baseUrl = env.base || minimist(process.argv.slice(2)).base || '/'
   args.network = env.network || minimist(process.argv.slice(2)).network || 'mainnet'
-  args.networkConfig = require(path.resolve(__dirname, `../networks/${args.network}.json`))
+  args.ticker = env.ticker || minimist(process.argv.slice(3)).ticker || 'bpl'
+  args.networkConfig = require(path.resolve(__dirname, `../networks/${args.ticker}/${args.network}.json`))
   args.routerMode = env.routerMode || (minimist(process.argv.slice(2)).history ? 'history' : 'hash')
 
   const argsPrint = []

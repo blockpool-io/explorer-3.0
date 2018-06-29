@@ -7,9 +7,10 @@ export default {
     server: null,
     nethash: null,
     alias: null,
-    activeDelegates: 51,
-    rewardOffset: 51,
+    activeDelegates: 201,
+    rewardOffset: 201,
     token: null,
+    tokenShortName: null,
     symbol: null,
     currencies: [],
     knownWallets: [],
@@ -37,6 +38,9 @@ export default {
     },
     [types.SET_NETWORK_TOKEN](state, payload) {
       state.token = payload.value
+    },
+    [types.SET_NETWORK_TOKEN_SHORT_NAME](state, payload) {
+      state.tokenShortName = payload.value
     },
     [types.SET_NETWORK_SYMBOL](state, payload) {
       state.symbol = payload.value
@@ -97,6 +101,12 @@ export default {
         value
       })
     },
+    setTokenShortName: ({commit}, value) => {
+      commit({
+        type: types.SET_NETWORK_TOKEN_SHORT_NAME,
+        value
+      })
+    },
     setSymbol: ({commit}, value) => {
       commit({
         type: types.SET_NETWORK_SYMBOL,
@@ -136,6 +146,7 @@ export default {
     activeDelegates: state => state.activeDelegates,
     rewardOffset: state => state.rewardOffset,
     token: state => state.token,
+    tokenShortName: state => state.tokenShortName,
     symbol: state => state.symbol,
     currencies: state => state.currencies,
     knownWallets: state => state.knownWallets,
