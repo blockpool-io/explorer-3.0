@@ -1,6 +1,6 @@
 {
   "title": "tBPL Explorer",
-  "server": "35.180.64.83:9029/api",
+  "server": "http://35.180.64.83:9028/api",
   "alias": "Testnet",
   "activeDelegates": 201,
   "rewardOffset": 75600,
