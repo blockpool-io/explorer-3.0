@@ -144,6 +144,10 @@ const methods = {
     return store.getters['network/token']
   },
 
+  networkTokenShortName() {
+    return store.getters['network/tokenShortName']
+  },
+
   capitalize(value) {
     return value.charAt(0).toUpperCase() + value.slice(1)
   },
