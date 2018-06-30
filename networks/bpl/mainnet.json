@@ -25,7 +25,8 @@
   "knownWallets": {
     "B8schQu51ox9yDVf9oyNzD98wLQb8PzG4N": "COSS",
     "BBkdB21btF8bW3ReVc6b67KQkssKnnBeMd": "Cryptopia",
-    "BDeeUQvZ61ErcpzjdUCTmwtxJcTg13HQYs": "TEC Distribution"
+    "BDeeUQvZ61ErcpzjdUCTmwtxJcTg13HQYs": "Blockpool",
+    "BJiMTWh6mNBYQErzQ49HVegqUUsn6trQ6H": "Genesis Wallet"
   },
   "defaults": {
     "currency": {
