@@ -5,7 +5,9 @@
   "activeDelegates": 201,
   "rewardOffset": 75600,
   "currencies": [],
-  "knownWallets": {},
+  "knownWallets": {
+    "BCWzC3cB225kNfsMum6taHWsqGE6gLQHKQ": "Genesis Wallet"
+  },
   "defaults": {
     "currency": null
   },
