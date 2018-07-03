@@ -4,7 +4,7 @@
       <span class="block md:inline-block mb-4 md:mb-0 text-center">&copy; blockpool.io | {{ year }}. {{ $t("All rights reserved") }}</span> <div class="block md:inline-block"><span class="hidden md:inline-block"> | </span> <span>{{ $t("Version") }}: <a :href="versionLink" target="_blank">{{ version }}</a> | {{ $t("Date") }}: {{ date }}</span></div>
     </div>
     <div class="text-center">
-      <a href="https://www.facebook.com/blockpool" target="_blank">
+      <a href="https://www.facebook.com/blockpool.io" target="_blank">
         <svg
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
