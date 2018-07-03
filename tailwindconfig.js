@@ -490,6 +490,7 @@ module.exports = {
     '38px': '38px',
     '50px': '50px',
     '80px': '80px',
+    '100px': '100px',
     full: '100%',
     screen: '100vw',
   },
