@@ -97,7 +97,7 @@ export default {
       return GIT_VERSION
     },
     versionLink() {
-      return `https://github.com/blockpool-io/explorer-3.0/commit/${GIT_VERSION}`
+      return `https://github.com/blockpool-io/bpl-explorer-3.0/commit/${GIT_VERSION}`
     },
     date() {
       return GIT_DATE
