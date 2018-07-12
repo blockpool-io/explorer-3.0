@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex items-center px-5 sm:px-10">
+  <div class="w-full flex items-center px-5 sm:pl-10 sm:pr-8">
     <button @click="$store.dispatch('ui/setHeaderType', null)">
       <img src="@/assets/images/icons/cross.svg" />
     </button>
