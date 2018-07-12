@@ -25,7 +25,6 @@
 
 <script type="text/ecmascript-6">
 import BlockService from '@/services/block'
-import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
@@ -34,27 +33,20 @@ export default {
   }),
 
   async mounted() {
-    await this.getBlock()
-    this.initialiseTimer()
-  },
-
-  computed: {
-    ...mapGetters('network', ['interval']),
+    this.prepareComponent()
   },
 
   methods: {
+    prepareComponent() {
+      this.getBlock()
+
+      this.$store.watch(state => state.network.height, value => this.getBlock())
+    },
+
     async getBlock() {
       const response = await BlockService.last()
       this.block = response
-    },
-
-    initialiseTimer() {
-      this.timer = setInterval(this.getBlock, this.interval * 1000)
-    },
-  },
-
-  beforeDestroy() {
-    clearInterval(this.timer)
-  },
+    }
+  }
 }
 </script>
