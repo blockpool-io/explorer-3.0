@@ -38,6 +38,10 @@ export default {
     this.initialiseTimer()
   },
 
+  computed: {
+    ...mapGetters('network', ['interval']),
+  },
+
   methods: {
     async getBlock() {
       const response = await BlockService.last()
@@ -45,7 +49,7 @@ export default {
     },
 
     initialiseTimer() {
-      this.timer = setInterval(this.getBlock, 8 * 1000)
+      this.timer = setInterval(this.getBlock, this.interval * 1000)
     },
   },
 

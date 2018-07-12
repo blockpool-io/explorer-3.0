@@ -33,6 +33,7 @@ import ActiveDelegates from '@/components/monitor/ActiveDelegates'
 import StandbyDelegates from '@/components/monitor/StandbyDelegates'
 import Forging from '@/components/monitor/Forging'
 import DelegateService from '@/services/delegate'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {
@@ -54,6 +55,10 @@ export default {
     this.initialiseTimer()
   },
 
+  computed: {
+    ...mapGetters('network', ['interval']),
+  },
+
   methods: {
     async getDelegates() {
       const response = await DelegateService.activeDelegates()
@@ -62,7 +67,7 @@ export default {
     },
 
     initialiseTimer() {
-      this.timer = setInterval(this.getDelegates, 8 * 1000)
+      this.timer = setInterval(this.getDelegates, this.interval * 1000)
     },
   },
 

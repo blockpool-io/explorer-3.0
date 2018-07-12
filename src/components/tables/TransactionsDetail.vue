@@ -42,7 +42,7 @@
       <table-column show="confirmations" :label="$t('Confirmations')" header-class="right-header-end-cell" cell-class="right-end-cell">
         <template slot-scope="row">
           <div class="flex items-center justify-end whitespace-no-wrap">
-            <div v-if="row.confirmations <= 52" class="flex items-center justify-end whitespace-no-wrap">
+            <div v-if="row.confirmations <= activeDelegates" class="flex items-center justify-end whitespace-no-wrap">
               <span class="text-green inline-block mr-2">{{ row.confirmations }}</span>
               <img class="icon flex-none" src="@/assets/images/icons/clock.svg" />
             </div>
@@ -62,6 +62,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapGetters } from 'vuex'
+
 export default {
   props: {
     transactions: {
@@ -77,7 +79,8 @@ export default {
           return !!transaction.vendorField
         })
       }
-    }
+    },
+    ...mapGetters('network', ['activeDelegates'])
   }
 }
 </script>

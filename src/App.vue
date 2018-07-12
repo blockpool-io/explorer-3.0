@@ -55,10 +55,12 @@ export default {
     }
 
     const response = await LoaderService.config()
-    this.$store.dispatch('network/setToken', response.token)
-    this.$store.dispatch('network/setTokenShortName', 'BPL')
-    this.$store.dispatch('network/setSymbol', response.symbol)
-    this.$store.dispatch('network/setNethash', response.nethash)
+    this.$store.dispatch('network/setToken', response.network.client.token)
+    this.$store.dispatch('network/setTokenShortName', response.network.client.tokenShortName)
+    this.$store.dispatch('network/setSymbol', response.network.client.symbol)
+    this.$store.dispatch('network/setNethash', response.network.nethash)
+    this.$store.dispatch('network/setNetworkInterval', response.config.interval)
+    this.$store.dispatch('network/setActiveDelegates', response.config.delegates)
 
     this.$store.dispatch(
       'ui/setLanguage',
@@ -88,7 +90,7 @@ export default {
   computed: {
     ...mapGetters('currency', { currencyName: 'name' }),
     ...mapGetters('ui', ['nightMode']),
-    ...mapGetters('network', ['token']),
+    ...mapGetters('network', ['token', 'interval']),
   },
 
   methods: {
@@ -127,7 +129,7 @@ export default {
         this.updateSupply()
         this.updateHeight()
         this.updateDelegates()
-      }, 8 * 1000)
+      }, this.interval * 1000)
     },
 
     clearTimers() {

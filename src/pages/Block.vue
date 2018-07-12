@@ -15,6 +15,7 @@ import Identity from '@/components/block/Identity'
 import BlockDetails from '@/components/block/Details'
 import Transactions from '@/components/block/Transactions'
 import BlockService from '@/services/block'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {Identity, BlockDetails, Transactions},
@@ -45,9 +46,13 @@ export default {
     this.initialiseTimer()
   },
 
+  computed: {
+    ...mapGetters('network', ['interval']),
+  },
+
   methods: {
     initialiseTimer() {
-      this.timer = setInterval(this.updateBlock, 8 * 1000)
+      this.timer = setInterval(this.updateBlock, this.interval * 1000)
     },
 
     updateBlock() {
