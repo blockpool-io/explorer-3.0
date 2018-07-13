@@ -28,17 +28,16 @@ import BlockService from '@/services/block'
 
 export default {
   data: () => ({
-    block: {},
-    timer: null,
+    block: {}
   }),
 
   async mounted() {
-    this.prepareComponent()
+    await this.prepareComponent()
   },
 
   methods: {
-    prepareComponent() {
-      this.getBlock()
+    async prepareComponent() {
+      await this.getBlock()
 
       this.$store.watch(state => state.network.height, value => this.getBlock())
     },

@@ -46,13 +46,11 @@ export default {
   data: () => ({
     delegates: null,
     delegateCount: null,
-    activeTab: 'active',
-    timer: null,
+    activeTab: 'active'
   }),
 
   async mounted() {
-    await this.getDelegates()
-    this.initialiseTimer()
+    await this.prepareComponent()
   },
 
   computed: {
@@ -60,20 +58,18 @@ export default {
   },
 
   methods: {
+    async prepareComponent() {
+      await this.getDelegates()
+
+      this.$store.watch(state => state.network.height, value => this.getDelegates())
+    },
+
     async getDelegates() {
       const response = await DelegateService.activeDelegates()
       this.delegates = response.delegates
       this.delegateCount = response.delegateCount
-    },
-
-    initialiseTimer() {
-      this.timer = setInterval(this.getDelegates, this.interval * 1000)
-    },
-  },
-
-  beforeDestroy() {
-    clearInterval(this.timer)
-  },
+    }
+  }
 }
 </script>
 
