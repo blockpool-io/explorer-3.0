@@ -19,6 +19,12 @@
         </template>
       </table-column>
 
+      <table-column show="reliability" :label="$t('Reliability')" header-class="right-header-cell hidden md:table-cell" cell-class="right-cell hidden md:table-cell w-40">
+        <template slot-scope="row">
+          {{ percentageString(row.reliability) }}
+        </template>
+      </table-column>
+
       <table-column show="approval" :label="$t('Approval')" header-class="right-header-cell sm:pr-10 hidden md:table-cell" cell-class="right-end-cell hidden md:table-cell w-40">
         <template slot-scope="row">
           <span v-tooltip="{ content: readableCrypto(row.vote, true, 2), placement: 'top' }">
