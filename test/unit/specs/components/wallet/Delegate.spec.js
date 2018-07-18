@@ -34,7 +34,7 @@ describe('wallet/Delegate', () => {
     const divs = wrapper.findAll('div.list-row-border-b')
     expect(divs).toHaveLength(6)
     expect(divs.at(0).text()).toBe('Delegate')
-    expect(divs.at(1).text()).toContain('Uptime')
+    expect(divs.at(1).text()).toContain('Productivity')
     expect(divs.at(2).text()).toBe('Rank/Status')
     expect(divs.at(3).text()).toContain('Approval')
     expect(divs.at(4).text()).toBe('Forged')
