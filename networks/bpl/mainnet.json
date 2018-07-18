@@ -1,0 +1,40 @@
+{
+  "title": "BPL Explorer",
+  "server": "http://13.56.163.57:9030/api",
+  "alias": "Main",
+  "activeDelegates": 201,
+  "rewardOffset": 75600,
+  "currencies": {
+    "AUD": "A$",
+    "BRL": "R$",
+    "BTC": "Ƀ",
+    "CAD": "C$",
+    "CHF": "CHF",
+    "CNY": "¥",
+    "ETH": "Ξ",
+    "EUR": "€",
+    "GBP": "£",
+    "INR": "₹",
+    "JPY": "¥",
+    "KRW": "₩",
+    "LTC": "Ł",
+    "NZD": "N$",
+    "RUB": "₽",
+    "USD": "$"
+  },
+  "knownWallets": {
+    "B8schQu51ox9yDVf9oyNzD98wLQb8PzG4N": "COSS",
+    "BBkdB21btF8bW3ReVc6b67KQkssKnnBeMd": "Cryptopia",
+    "BDeeUQvZ61ErcpzjdUCTmwtxJcTg13HQYs": "Blockpool",
+    "BJiMTWh6mNBYQErzQ49HVegqUUsn6trQ6H": "Genesis Wallet"
+  },
+  "defaults": {
+    "currency": {
+      "name": "USD",
+      "symbol": "$"
+    }
+  },
+  "config": {
+    "priceChart": true
+  }
+}

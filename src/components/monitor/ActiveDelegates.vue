@@ -48,6 +48,12 @@
         </template>
       </table-column>
 
+      <table-column show="reliabilitiy" :label="$t('Reliability')" header-class="right-header-cell hidden md:table-cell" cell-class="py-3 px-4 text-right border-none hidden md:table-cell">
+        <template slot-scope="row">
+          {{ percentageString(row.reliability) }}
+        </template>
+      </table-column>
+
       <table-column show="approval" :label="$t('Approval')" header-class="right-header-cell pr-5 md:pr-10 hidden md:table-cell" cell-class="py-3 px-4 md:pr-10 text-right border-none hidden md:table-cell">
         <template slot-scope="row">
           <span v-tooltip="{ content: readableCrypto(row.vote, true, 2), placement: 'top' }">
@@ -93,14 +99,12 @@ export default {
 
       const lastBlock = row.forgingStatus.lastBlock
 
-      const tooltip = {
+      return lastBlock ? {
         content: `[${status}] Last Block @ ${
             lastBlock.height
           } on ${this.readableTimestamp(lastBlock.timestamp)}`,
         classes: [`tooltip-bg-${row.forgingStatus.code}`, 'font-sans']
-      }
-
-      return lastBlock ? tooltip : status
+      } : status
     },
 
     statusColor(row) {

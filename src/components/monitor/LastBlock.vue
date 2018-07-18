@@ -10,7 +10,7 @@
     <div class="hidden md:block">
       <div class="text-grey mb-2 min-w-0">{{ $t("Forged") }}</div>
       <div class="text-lg text-white truncate">
-        {{ readableCrypto(block.totalForged) }} {{ $tc("from transactions", block.numberOfTransactions, { count: block.numberOfTransactions }) }}
+        {{ readableCrypto(block.totalForged) }}
       </div>
     </div>
 
@@ -25,32 +25,27 @@
 
 <script type="text/ecmascript-6">
 import BlockService from '@/services/block'
-import { mapGetters } from 'vuex'
 
 export default {
   data: () => ({
-    block: {},
-    timer: null,
+    block: {}
   }),
 
   async mounted() {
-    await this.getBlock()
-    this.initialiseTimer()
+    await this.prepareComponent()
   },
 
   methods: {
+    async prepareComponent() {
+      await this.getBlock()
+
+      this.$store.watch(state => state.network.height, value => this.getBlock())
+    },
+
     async getBlock() {
       const response = await BlockService.last()
       this.block = response
-    },
-
-    initialiseTimer() {
-      this.timer = setInterval(this.getBlock, 8 * 1000)
-    },
-  },
-
-  beforeDestroy() {
-    clearInterval(this.timer)
-  },
+    }
+  }
 }
 </script>

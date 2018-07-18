@@ -2,6 +2,7 @@
   "Height": "Altura",
   "Network": "Rede",
   "Main": "Mainnet",
+  "Testnet": "Testnet",
   "Supply": "Distribuição",
   "Market Cap": "Valor de Mercado",
 
@@ -66,6 +67,7 @@
   "Missed block, Awaiting Slot": "Bloco foi perdido, Aguardando Slot",
   "Not Forging": "Não está Forjando",
   "Awaiting Slot": "Aguardando Slot",
+  "Never": "Nunca",
 
   "Address": "Endereço",
   "Public Key": "Public Key",
@@ -80,7 +82,7 @@
   "missed": "perdido",
   "Votes": "Votos",
   "Voters": "Votantes",
-  "Only voters with more than 0.1 Ark": "Somente votantes com mais de 0.1 Ark",
+  "Only voters with more than 0.1 token": "Somente votantes com mais de 0.1 {token}",
   "See all": "Ver todos",
   "All": "Todos",
   "Sent": "Enviado",

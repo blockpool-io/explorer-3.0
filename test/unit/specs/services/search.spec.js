@@ -3,11 +3,11 @@ import store from '@/store'
 
 describe('Search Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
+    store.dispatch('network/setServer', 'http://13.56.163.57:9030/api')
   })
 
   it('should return address when searching for existing wallet', async () => {
-    const data = await searchService.findByAddress('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC')
+    const data = await searchService.findByAddress('BDeeUQvZ61ErcpzjdUCTmwtxJcTg13HQYs')
     expect(Object.keys(data.account).sort()).toEqual([
       'address',
       'unconfirmedBalance',
@@ -22,11 +22,11 @@ describe('Search Service', () => {
   })
 
   it('should fail when searching for non-existing wallet', async () => {
-    await expect(searchService.findByAddress('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xz')).rejects.toThrow()
+    await expect(searchService.findByAddress('ffffffffffffffffffffffffffffffffff')).rejects.toThrow()
   })
 
   it('should return delegate address when searching for existing username', async () => {
-    const data = await searchService.findByUsername('arkpool')
+    const data = await searchService.findByUsername('bpl_dev_del')
     expect(Object.keys(data.delegate).sort()).toEqual([
       'username',
       'address',
@@ -45,7 +45,7 @@ describe('Search Service', () => {
   })
 
   it('should return delegate address when searching for existing public key', async () => {
-    const data = await searchService.findByPublicKey('02b1d2ea7c265db66087789f571fceb8cc2b2d89e296ad966efb8ed51855f2ae0b')
+    const data = await searchService.findByPublicKey('03e6e411575c8edd3a053a3ba86118005c8971c9e1349d44dd91a8742bdfa6dca7')
     expect(Object.keys(data.delegate).sort()).toEqual([
       'username',
       'address',
@@ -64,7 +64,8 @@ describe('Search Service', () => {
   })
 
   it('should return block when searching for existing block id', async () => {
-    const data = await searchService.findByBlockId('16259489398325158419')
+    jest.setTimeout(30000) // This function easily takes 10-30 seconds to resolve, not sure why
+    const data = await searchService.findByBlockId('11217043835834306811')
     expect(Object.keys(data.block).sort()).toEqual([
       'id',
       'version',
@@ -86,11 +87,12 @@ describe('Search Service', () => {
   })
 
   it('should fail when searching for non-existing block id', async () => {
+    jest.setTimeout(30000) // This function easily takes 10-30 seconds to resolve, not sure why
     await expect(searchService.findByBlockId('0')).rejects.toThrow()
   })
 
   it('should return transaction when searching for existing transaction id', async () => {
-    const data = await searchService.findByTransactionId('e0a78fa665eb69a5e607a4f3f39a6c9c76a24b647f1cd1d56dd75b29ccf7fa60')
+    const data = await searchService.findByTransactionId('7efc7dbadfa439a6e21a2bce3d3bbaf63236db92948d33bb241b57fbf6713ce0')
     expect(Object.keys(data.transaction).sort()).toEqual([
       'id',
       'blockid',

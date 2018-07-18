@@ -22,7 +22,7 @@ describe('monitor/Forging', () => {
       modules: {
         network: {
           namespaced: true,
-          getters: { activeDelegates: state => 51 }
+          getters: { activeDelegates: state => 201 }
         }
       },
       strict: true
@@ -34,7 +34,7 @@ describe('monitor/Forging', () => {
       mixins,
       store,
       stubs: {
-        'ark-meter': '<div></div>'
+        'bpl-meter': '<div></div>'
       },
       propsData: {
         delegates: []

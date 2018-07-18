@@ -13,7 +13,7 @@ const gitRevision = require('./utils/git-revision')()
 const argumentParser = require('./argument-parser')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
-const createDevWebpackConfig = (host, port, network, networkConfig, routerMode) => {
+const createDevWebpackConfig = (host, port, ticker, network, networkConfig, routerMode) => {
   return merge(baseWebpackConfig, {
     module: {
       rules: utils.styleLoaders({sourceMap: config.dev.cssSourceMap, usePostCSS: true})
@@ -50,6 +50,7 @@ const createDevWebpackConfig = (host, port, network, networkConfig, routerMode) 
       new webpack.DefinePlugin({
         'process.env': {
           ...require('../config/dev.env'),
+          ...{TICKER_CONFIG: `"${ticker}"`},
           ...{EXPLORER_CONFIG: `"${network}"`},
           ...{ROUTER_MODE: `"${routerMode}"`},
         },
@@ -90,7 +91,7 @@ module.exports = (env) => {
       } else {
         // publish the new Port, necessary for e2e tests
         process.env.PORT = port
-        const devWebpackConfig = createDevWebpackConfig(args.host, args.port, args.network, args.networkConfig, args.routerMode)
+        const devWebpackConfig = createDevWebpackConfig(args.host, args.port, args.ticker, args.network, args.networkConfig, args.routerMode)
         devWebpackConfig.mode = 'development'
         // add port to devServer config
         devWebpackConfig.devServer.port = port

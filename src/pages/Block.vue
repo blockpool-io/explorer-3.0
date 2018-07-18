@@ -15,13 +15,13 @@ import Identity from '@/components/block/Identity'
 import BlockDetails from '@/components/block/Details'
 import Transactions from '@/components/block/Transactions'
 import BlockService from '@/services/block'
+import { mapGetters } from 'vuex'
 
 export default {
   components: {Identity, BlockDetails, Transactions},
 
   data: () => ({
-    block: {},
-    timer: null
+    block: {}
   }),
 
   async beforeRouteEnter (to, from, next) {
@@ -41,19 +41,22 @@ export default {
     } catch(e) { next({ name: '404' }) }
   },
 
-  mounted() {
-    this.initialiseTimer()
+  async mounted() {
+    await this.prepareComponent()
+  },
+
+  computed: {
+    ...mapGetters('network', ['interval']),
   },
 
   methods: {
-    initialiseTimer() {
-      this.timer = setInterval(this.updateBlock, 8 * 1000)
+    async prepareComponent() {
+      this.$store.watch(state => state.network.height, value => this.updateBlock())
     },
 
-    updateBlock() {
-      BlockService
-        .find(this.block.id)
-        .then(response => this.setBlock(response))
+    async updateBlock() {
+      const response = await BlockService.find(this.block.id)
+      this.setBlock(response)
     },
 
     setBlock (block) {

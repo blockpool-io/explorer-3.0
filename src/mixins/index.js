@@ -79,7 +79,7 @@ const methods = {
   },
 
   rawCurrency(value, currencyName) {
-    return [store.getters['network/token'], 'BTC', 'ETH', 'LTC'].some(
+    return [store.getters['network/tokenShortName'], 'BTC', 'ETH', 'LTC'].some(
       c => currencyName.indexOf(c) > -1
     )
       ? value.toLocaleString(undefined, {
@@ -110,9 +110,8 @@ const methods = {
     }).format(value)
   },
 
-  readableCurrency(value, currency = null, normalise = true) {
+  readableCurrency(value, showDecimals = true, currency = null, normalise = true) {
     const currencyName = currency || store.getters['currency/name']
-
     value *= store.getters['currency/rate']
 
     if (normalise) {
@@ -123,10 +122,12 @@ const methods = {
       c => currencyName.indexOf(c) > -1
     )
       ? value.toLocaleString(undefined, {
-        maximumFractionDigits: 8,
+        minimumFractionDigits: showDecimals ? 8 : 0,
+        maximumFractionDigits: showDecimals ? 8 : 0,
       })
       : value.toLocaleString(undefined, {
-        maximumFractionDigits: 2,
+        minimumFractionDigits: showDecimals ? 2 : 0,
+        maximumFractionDigits: showDecimals ? 2 : 0,
       })
   },
 
@@ -142,6 +143,10 @@ const methods = {
 
   networkToken() {
     return store.getters['network/token']
+  },
+
+  networkTokenShortName() {
+    return store.getters['network/tokenShortName']
   },
 
   capitalize(value) {

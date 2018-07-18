@@ -3,11 +3,11 @@ import store from '@/store'
 
 describe('Wallet Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setServer', 'https://explorer.ark.io:8443/api')
+    store.dispatch('network/setServer', 'http://13.56.163.57:9030/api')
   })
 
   it('should return address when searching for existing wallet', async () => {
-    const data = await walletService.find('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC')
+    const data = await walletService.find('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq')
     // Response should contain all these properties
     expect(Object.keys(data).sort()).toEqual([
       'address',
@@ -23,11 +23,11 @@ describe('Wallet Service', () => {
   })
 
   it('should fail when searching for incorrect wallet address', async () => {
-    await expect(walletService.find('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gsx')).rejects.toThrow()
+    await expect(walletService.find('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrx')).rejects.toThrow()
   })
 
   it('should return delegate when address is voting for one', async () => {
-    const data = await walletService.vote('ATsPMTAHNsUwKedzNpjTNRfcj1oRGaX5xC')
+    const data = await walletService.vote('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq')
     expect(Object.keys(data).sort()).toEqual([
       'username',
       'address',
@@ -42,11 +42,11 @@ describe('Wallet Service', () => {
   })
 
   it('should return false when address is not voting', async () => {
-    await expect(walletService.vote('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')).resolves.toEqual(false)
+    await expect(walletService.vote('BJiMTWh6mNBYQErzQ49HVegqUUsn6trQ6H')).resolves.toEqual(false)
   })
 
   it('should fail when fetching vote for incorrect wallet address', async () => {
-    await expect(walletService.vote('AYCTHSZionfGoQsRnv5gECEuFWcZXS38gsx')).rejects.toThrow()
+    await expect(walletService.vote('BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrx')).rejects.toThrow()
   })
 
   it('should return a list of top wallet accounts', async () => {

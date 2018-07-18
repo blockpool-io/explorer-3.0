@@ -35,15 +35,15 @@ describe('isDelegateByPublicKey mixin', () => {
 
 describe('rawCurrency mixin', () => {
   it('should display selected cryptocurrency with 8 digits or less', () => {
-    store.dispatch('network/setToken', 'ARK')
-    expect(mixins.rawCurrency(10.1234567891234, 'ARK')).toEqual(displayCrypto(10.12345679))
+    store.dispatch('network/setToken', 'BPL')
+    expect(mixins.rawCurrency(10.1234567891234, 'BPL')).toEqual(displayCrypto(10.12345679))
     expect(mixins.rawCurrency(10.1234567891234, 'ETH')).toEqual(displayCrypto(10.12345679))
     expect(mixins.rawCurrency(10.1234567891234, 'BTC')).toEqual(displayCrypto(10.12345679))
-    expect(mixins.rawCurrency(10.12345, 'ARK')).toEqual(displayCrypto(10.12345))
+    expect(mixins.rawCurrency(10.12345, 'BPL')).toEqual(displayCrypto(10.12345))
   })
 
   it('should display non-cryptocurrency always with 2 digits', () => {
-    store.dispatch('network/setToken', 'ARK')
+    store.dispatch('network/setToken', 'BPL')
     expect(mixins.rawCurrency(10.1234567891, 'USD')).toEqual(displayFiat(10.12))
     expect(mixins.rawCurrency(10.1234567891, 'AUD')).toEqual(displayFiat(10.12))
     expect(mixins.rawCurrency(10.1234567891, 'EUR')).toEqual(displayFiat(10.12))
@@ -71,11 +71,11 @@ describe('readableCrypto mixin', () => {
   })
 
   it('should return crypto value in readable format, including symbol', () => {
-    store.dispatch('network/setSymbol', 'Ѧ')
-    expect(mixins.readableCrypto(10 * Math.pow(10, 8))).toEqual(displayCrypto(10) + ' Ѧ')
-    expect(mixins.readableCrypto(10 * Math.pow(10, 8), true)).toEqual(displayCrypto(10) + ' Ѧ')
-    expect(mixins.readableCrypto(10.12345678912345 * Math.pow(10, 8), true)).toEqual(displayCrypto(10.12345679) + ' Ѧ')
-    expect(mixins.readableCrypto(10.1234 * Math.pow(10, 8), true)).toEqual(displayCrypto(10.1234) + ' Ѧ')
+    store.dispatch('network/setSymbol', 'β')
+    expect(mixins.readableCrypto(10 * Math.pow(10, 8))).toEqual(displayCrypto(10) + ' β')
+    expect(mixins.readableCrypto(10 * Math.pow(10, 8), true)).toEqual(displayCrypto(10) + ' β')
+    expect(mixins.readableCrypto(10.12345678912345 * Math.pow(10, 8), true)).toEqual(displayCrypto(10.12345679) + ' β')
+    expect(mixins.readableCrypto(10.1234 * Math.pow(10, 8), true)).toEqual(displayCrypto(10.1234) + ' β')
   })
 
   it('should return nothing if undefined value is given', () => {
@@ -86,7 +86,7 @@ describe('readableCrypto mixin', () => {
 
 describe('networkToken mixin', () => {
   it('should return the set network token', () => {
-    store.dispatch('network/setToken', 'ARK')
-    expect(mixins.networkToken()).toEqual('ARK')
+    store.dispatch('network/setToken', 'BPL')
+    expect(mixins.networkToken()).toEqual('BPL')
   })
 })

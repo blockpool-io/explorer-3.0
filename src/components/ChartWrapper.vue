@@ -50,7 +50,7 @@ export default {
                 // Skip every second tick
                 if (index % 2 === 0) return
 
-                if ([store.getters['network/token'], 'BTC', 'ETH', 'LTC'].some(c => store.getters['currency/name'].indexOf(c) > -1)) {
+                if ([store.getters['network/tokenShortName'], 'BTC', 'ETH', 'LTC'].some(c => store.getters['currency/name'].indexOf(c) > -1)) {
                   return store.getters['currency/symbol'] + value.toFixed(8)
                 }
 
@@ -103,9 +103,9 @@ export default {
         callbacks: {
           title: tooltipItem => {
             const name = store.getters['currency/name']
-            const token = store.getters['currency/symbol']
+            const symbol = store.getters['currency/symbol']
 
-            if ([token, 'BTC', 'ETH', 'LTC'].some(c => name.indexOf(c) > -1)) {
+            if ([symbol, 'BTC', 'ETH', 'LTC'].some(c => name.indexOf(c) > -1)) {
               return `${name} ${Number(tooltipItem[0].yLabel).toFixed(8)}`
             }
 
@@ -131,7 +131,7 @@ export default {
       this.renderChart()
 
       this.watchCurrencyName()
-      this.watchNetworkToken()
+      this.watchNetworkTokenShortName()
     },
 
     period(type) {
@@ -169,8 +169,8 @@ export default {
       this.$store.watch((state) => state.currency.name, (value) => this.renderChart())
     },
 
-    watchNetworkToken() {
-      this.$store.watch((state) => state.network.token, (value) => this.renderChart())
+    watchNetworkTokenShortName() {
+      this.$store.watch((state) => state.network.tokenShortName, (value) => this.renderChart())
     },
   }
 }

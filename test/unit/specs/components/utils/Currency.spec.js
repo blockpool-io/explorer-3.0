@@ -29,6 +29,6 @@ describe('Utils/Currency', () => {
     })
     expect(wrapper.contains('span')).toBe(true)
     expect(wrapper.findAll('span')).toHaveLength(1)
-    expect(wrapper.text()).toEqual(mixins.readableCurrency(1012345678) + ' Ѧ')
+    expect(wrapper.text()).toEqual(mixins.readableCurrency(1012345678) + ' β')
   })
 })

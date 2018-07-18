@@ -7,14 +7,16 @@ export default {
     server: null,
     nethash: null,
     alias: null,
-    activeDelegates: 51,
-    rewardOffset: 51,
+    activeDelegates: 201,
+    rewardOffset: 201,
     token: null,
+    tokenShortName: null,
     symbol: null,
     currencies: [],
     knownWallets: [],
     supply: 0,
-    height: 0
+    height: 0,
+    interval: 15
   },
   mutations: {
     [types.SET_NETWORK_DEFAULTS](state, payload) {
@@ -38,6 +40,9 @@ export default {
     [types.SET_NETWORK_TOKEN](state, payload) {
       state.token = payload.value
     },
+    [types.SET_NETWORK_TOKEN_SHORT_NAME](state, payload) {
+      state.tokenShortName = payload.value
+    },
     [types.SET_NETWORK_SYMBOL](state, payload) {
       state.symbol = payload.value
     },
@@ -52,6 +57,9 @@ export default {
     },
     [types.SET_NETWORK_HEIGHT](state, payload) {
       state.height = payload.value
+    },
+    [types.SET_NETWORK_INTERVAL](state, payload) {
+      state.interval = payload.value
     }
   },
   actions: {
@@ -97,6 +105,12 @@ export default {
         value
       })
     },
+    setTokenShortName: ({commit}, value) => {
+      commit({
+        type: types.SET_NETWORK_TOKEN_SHORT_NAME,
+        value
+      })
+    },
     setSymbol: ({commit}, value) => {
       commit({
         type: types.SET_NETWORK_SYMBOL,
@@ -126,6 +140,12 @@ export default {
         type: types.SET_NETWORK_HEIGHT,
         value
       })
+    },
+    setNetworkInterval: ({commit}, value) => {
+      commit({
+        type: types.SET_NETWORK_INTERVAL,
+        value
+      })
     }
   },
   getters: {
@@ -136,10 +156,12 @@ export default {
     activeDelegates: state => state.activeDelegates,
     rewardOffset: state => state.rewardOffset,
     token: state => state.token,
+    tokenShortName: state => state.tokenShortName,
     symbol: state => state.symbol,
     currencies: state => state.currencies,
     knownWallets: state => state.knownWallets,
     supply: state => state.supply,
-    height: state => state.height
+    height: state => state.height,
+    interval: state => state.interval
   }
 }

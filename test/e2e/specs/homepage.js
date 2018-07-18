@@ -65,7 +65,7 @@ module.exports = {
   },
 
   'header should be able to change currency': function(browser) {
-    browser.useXpath().click("//button[contains(., 'ARK/USD')]")
+    browser.useXpath().click("//button[contains(., 'BPL/USD')]")
     browser
       .useCss()
       .assert.visible('.menu-button')
@@ -73,14 +73,14 @@ module.exports = {
     browser
       .useXpath()
       .click("//button[contains(., 'ETH')]")
-      .waitForElementVisible("//button[contains(., 'ARK/ETH')]")
+      .waitForElementVisible("//button[contains(., 'BPL/ETH')]")
     browser
-      .click("//button[contains(., 'ARK/ETH')]")
+      .click("//button[contains(., 'BPL/ETH')]")
       .useCss().waitForElementVisible('.close-button')
     browser
       .useXpath()
       .click("//button[contains(., 'USD')]")
-      .waitForElementVisible("//button[contains(., 'ARK/USD')]")
+      .waitForElementVisible("//button[contains(., 'BPL/USD')]")
     browser
       .useCss()
       .expect.element('.menu-button').to.not.be.present
@@ -131,7 +131,7 @@ module.exports = {
       .useXpath()
       .waitForElementVisible("//button[contains(., 'Top Wallets')]")
       .click("//button[contains(., 'Top Wallets')]")
-      .pause(500)
+      .pause(1000)
       
     browser
       .useCss()
@@ -176,12 +176,12 @@ module.exports = {
     browser
       .click('input#search')
       .waitForElementVisible('input.search-input')
-      .setValue('input.search-input', ['ARK Bounty', browser.Keys.ENTER])
+      .setValue('input.search-input', ['Cryptopia', browser.Keys.ENTER])
       .pause(1000)
     browser
       .useXpath()
       .waitForElementVisible("//h1[text() = 'Wallet Summary']")
-      .assert.urlContains('/wallets/AYCTHSZionfGoQsRnv5gECEuFWcZXS38gs')
+      .assert.urlContains('/wallets/BBkdB21btF8bW3ReVc6b67KQkssKnnBeMd')
   },
 
   'it should be possible to search for a delegate': function (browser) {
@@ -194,12 +194,12 @@ module.exports = {
     browser
       .click('input#search')
       .waitForElementVisible('input.search-input')
-      .setValue('input.search-input', ['genesis_1', browser.Keys.ENTER])
+      .setValue('input.search-input', ['dated', browser.Keys.ENTER])
       .pause(1000)
     browser
       .useXpath()
       .waitForElementVisible("//h1[text() = 'Wallet Summary']")
-      .assert.urlContains('/wallets/AeLpRK8rFVtBeyBVqBtdQpWDfLzaiNujKr')
+      .assert.urlContains('/wallets/BHzWuAJbMRLAUKTQfjjn56KR3xoBar6CRi')
   },
 
   'it should be possible to search for an address': function (browser) {
@@ -212,12 +212,12 @@ module.exports = {
     browser
       .click('input#search')
       .waitForElementVisible('input.search-input')
-      .setValue('input.search-input', ['AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv', browser.Keys.ENTER])
+      .setValue('input.search-input', ['BHtQdXkeqzwa5m4rj516RoMoSAEEFEMsTp', browser.Keys.ENTER])
       .pause(1000)
     browser
       .useXpath()
       .waitForElementVisible("//h1[text() = 'Wallet Summary']")
-      .assert.urlContains('/wallets/AUDud8tvyVZa67p3QY7XPRUTjRGnWQQ9Xv')
+      .assert.urlContains('/wallets/BHtQdXkeqzwa5m4rj516RoMoSAEEFEMsTp')
   },
 
   'it should be possible to search for a block ID': function (browser) {
@@ -230,12 +230,12 @@ module.exports = {
     browser
       .click('input#search')
       .waitForElementVisible('input.search-input')
-      .setValue('input.search-input', ['13507259488170268466', browser.Keys.ENTER])
+      .setValue('input.search-input', ['11217043835834306811', browser.Keys.ENTER])
       .pause(1000)
     browser
       .useXpath()
       .waitForElementVisible("//h1[text() = 'Block']")
-      .assert.urlContains('/block/13507259488170268466')
+      .assert.urlContains('/block/11217043835834306811')
   },
 
   'it should be possible to search for a transaction ID': function (browser) {
@@ -248,12 +248,12 @@ module.exports = {
     browser
       .click('input#search')
       .waitForElementVisible('input.search-input')
-      .setValue('input.search-input', ['4a169d00de2029110829fad77eebf6fd25751418b47561f05b994750acbd3b13', browser.Keys.ENTER])
+      .setValue('input.search-input', ['7efc7dbadfa439a6e21a2bce3d3bbaf63236db92948d33bb241b57fbf6713ce0', browser.Keys.ENTER])
       .pause(1000)
     browser
       .useXpath()
       .waitForElementVisible("//h1[text() = 'Transaction']")
-      .assert.urlContains('/transaction/4a169d00de2029110829fad77eebf6fd25751418b47561f05b994750acbd3b13')
+      .assert.urlContains('/transaction/7efc7dbadfa439a6e21a2bce3d3bbaf63236db92948d33bb241b57fbf6713ce0')
   },
 
   'search should show a notice if nothing could be found': function (browser) {

@@ -6,8 +6,13 @@
     </div>
 
     <div class="list-row-border-b">
-      <div>{{ $t("Uptime") }}</div>
+      <div>{{ $t("Productivity") }}</div>
       <div>{{ percentageString(delegate.productivity) }}</div>
+    </div>
+
+    <div class="list-row-border-b">
+      <div>{{ $t("Reliability") }}</div>
+      <div>{{ percentageString(delegate.reliability) }}</div>
     </div>
 
     <div class="list-row-border-b">

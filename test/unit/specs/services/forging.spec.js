@@ -25,7 +25,7 @@ const dummyDelegate = {
 
 describe('Forging Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setActiveDelegates', 51)
+    store.dispatch('network/setActiveDelegates', 201)
   })
 
   it('should return the status for the given delegate', () => {

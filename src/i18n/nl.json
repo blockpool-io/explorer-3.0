@@ -2,6 +2,7 @@
   "Height": "Hoogte",
   "Network": "Netwerk",
   "Main": "Main",
+  "Testnet": "Testnet",
   "Supply": "Voorraad",
   "Market Cap": "Market Cap",
 
@@ -66,6 +67,7 @@
   "Missed block, Awaiting Slot": "Block gemist, Wachten op plek",
   "Not Forging": "Niet aan het forgen",
   "Awaiting Slot": "Wachten op een plek",
+  "Never": "Nooit",
 
   "Address": "Adres",
   "Public Key": "Public Key",
@@ -80,7 +82,7 @@
   "missed": "gemist",
   "Votes": "Stemmen",
   "Voters": "Stemmers",
-  "Only voters with more than 0.1 Ark": "Alleen stemmers met meer dan 0.1 Ark",
+  "Only voters with more than 0.1 token": "Alleen stemmers met meer dan 0.1 {token}",
   "See all": "Zie alle",
   "All": "Alles",
   "Sent": "Verzonden",
