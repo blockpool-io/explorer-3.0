@@ -48,7 +48,7 @@
         </template>
       </table-column>
 
-      <table-column show="reliabilitiy" :label="$t('Reliability')" header-class="right-header-cell hidden md:table-cell" cell-class="py-3 px-4 text-right border-none hidden md:table-cell">
+      <table-column v-if="delegates[0].reliability" show="reliability" :label="$t('Reliability')" header-class="right-header-cell hidden md:table-cell" cell-class="py-3 px-4 text-right border-none hidden md:table-cell">
         <template slot-scope="row">
           {{ percentageString(row.reliability) }}
         </template>

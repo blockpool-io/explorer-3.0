@@ -10,7 +10,7 @@
       <div>{{ percentageString(delegate.productivity) }}</div>
     </div>
 
-    <div class="list-row-border-b">
+    <div v-if="delegate.reliability" class="list-row-border-b">
       <div>{{ $t("Reliability") }}</div>
       <div>{{ percentageString(delegate.reliability) }}</div>
     </div>
