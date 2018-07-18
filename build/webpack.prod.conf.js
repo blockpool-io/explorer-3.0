@@ -22,7 +22,7 @@ class TailwindExtractor {
   }
 }
 
-const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
+const createWebpackConfig = (baseUrl, ticker, network, networkConfig, routerMode) => {
   return merge(baseWebpackConfig, {
     module: {
       rules: utils.styleLoaders({
@@ -44,6 +44,7 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
       new webpack.DefinePlugin({
         'process.env': {
           ...require('../config/prod.env'),
+          ...{TICKER_CONFIG: `"${ticker}"`},
           ...{EXPLORER_CONFIG: `"${network}"`},
           ...{ROUTER_MODE: `"${routerMode}"`}
         },
@@ -160,7 +161,7 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
 module.exports = (env) => {
   const args = argumentParser(env)
 
-  const webpackConfig = createWebpackConfig(args.baseUrl, args.network, args.networkConfig, args.routerMode)
+  const webpackConfig = createWebpackConfig(args.baseUrl, args.ticker, args.network, args.networkConfig, args.routerMode)
   webpackConfig.mode = 'production'
 
   if (config.build.productionGzip) {
