@@ -57,12 +57,11 @@ export default {
 
     const response = await LoaderService.config()
     this.$store.dispatch('network/setToken', response.network.token)
-    // this.$store.dispatch('network/setTokenShortName', response.network.client.tokenShortName)
-    this.$store.dispatch('network/setTokenShortName', 'BPL')
+    this.$store.dispatch('network/setTokenShortName', response.network.tokenShortName)
     this.$store.dispatch('network/setSymbol', response.network.symbol)
     this.$store.dispatch('network/setNethash', response.network.nethash)
-    // this.$store.dispatch('network/setNetworkInterval', response.config.interval)
-    // this.$store.dispatch('network/setActiveDelegates', response.config.delegates)
+    this.$store.dispatch('network/setNetworkInterval', response.config.interval)
+    this.$store.dispatch('network/setActiveDelegates', response.config.delegates)
 
     this.$store.dispatch(
       'ui/setLanguage',
