@@ -1,0 +1,19 @@
+{
+  "title": "WBX Explorer",
+  "server": "http://165.227.224.102:9032/api",
+  "alias": "Main",
+  "activeDelegates": 51,
+  "rewardOffset": 75600,
+  "currencies": [],
+  "knownWallets": {
+  },
+  "defaults": {
+    "currency": {
+      "name": "USD",
+      "symbol": "$"
+    }
+  },
+  "config": {
+    "priceChart": false
+  }
+}
