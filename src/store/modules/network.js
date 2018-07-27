@@ -16,7 +16,8 @@ export default {
     knownWallets: [],
     supply: 0,
     height: 0,
-    interval: 15
+    interval: 15,
+    epochTime: null
   },
   mutations: {
     [types.SET_NETWORK_DEFAULTS](state, payload) {
@@ -60,6 +61,9 @@ export default {
     },
     [types.SET_NETWORK_INTERVAL](state, payload) {
       state.interval = payload.value
+    },
+    [types.SET_NETWORK_EPOCHTIME](state, payload) {
+      state.epochTime = payload.value
     }
   },
   actions: {
@@ -146,6 +150,12 @@ export default {
         type: types.SET_NETWORK_INTERVAL,
         value
       })
+    },
+    setNetworkEpochTime: ({commit}, value) => {
+      commit({
+        type: types.SET_NETWORK_EPOCHTIME,
+        value
+      })
     }
   },
   getters: {
@@ -162,6 +172,7 @@ export default {
     knownWallets: state => state.knownWallets,
     supply: state => state.supply,
     height: state => state.height,
-    interval: state => state.interval
+    interval: state => state.interval,
+    epochTime: state => state.epochTime
   }
 }
