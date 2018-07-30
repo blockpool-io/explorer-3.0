@@ -79,6 +79,9 @@ const createWebpackConfig = (baseUrl, ticker, network, networkConfig, routerMode
           'table-component__th--sort-asc', 'table-component__th--sort-desc',
           'tr', 'td'
         ],
+        whitelistPatterns: [
+          /^tooltip-bg-/
+        ],
         extractors: [{
           extractor: TailwindExtractor,
           extensions: ["html", "js", "vue"]
