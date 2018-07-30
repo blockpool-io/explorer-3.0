@@ -9,11 +9,9 @@ describe('Loader Service', () => {
   it('should return network settings', async () => {
     const data = await loaderService.config()
     expect(Object.keys(data).sort()).toEqual([
-      'nethash',
-      'token',
-      'symbol',
-      'explorer',
-      'version'
+      'success',
+      'network',
+      'config'
     ].sort())
   })
 })

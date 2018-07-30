@@ -43,8 +43,8 @@ describe('Block Service', () => {
   })
 
   it('should return the supply', async () => {
-    const data = await blockService.supply()
-    expect(data).toBeGreaterThan(13439174400000000)
+    let data = await blockService.supply()
+    expect(Number(data)).toBeGreaterThan(2500000000000000)
   })
 
   it('should return the block for the given id', async () => {
@@ -80,25 +80,25 @@ describe('Block Service', () => {
     expect(data).toBeDefined()
   })
 
-  it('should fail to return count when given generator public key is incorrect', async () => {
+  it('should return zero when given generator public key is incorrect', async () => {
     const data = await blockService.forgedByPublicKeyCount('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
-    expect(data).toBeUndefined()
+    expect(data).toEqual(0)
   })
 
   it('should return the last block for given generator public key', async () => {
-    jest.setTimeout(30000) // This function easily takes 10-30 seconds to resolve, not sure why
+    jest.setTimeout(60000) // This function easily takes 10-30 seconds to resolve, not sure why
     const data = await blockService.lastBlockByPublicKey('03e6e411575c8edd3a053a3ba86118005c8971c9e1349d44dd91a8742bdfa6dca7')
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })
 
   it('should return undefined when given generator public key is incorrect', async () => {
-    jest.setTimeout(30000) // This function easily takes 10-30 seconds to resolve, not sure why
+    jest.setTimeout(60000) // This function easily takes 10-30 seconds to resolve, not sure why
     const data = await blockService.lastBlockByPublicKey('ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff')
     expect(data).toBeUndefined()
   })
 
   it('should return the previous block for the given height', async () => {
-    jest.setTimeout(30000) // This function easily takes 10-30 seconds to resolve, not sure why
+    jest.setTimeout(60000) // This function easily takes 10-30 seconds to resolve, not sure why
     const data = await blockService.findPrevious(1000000)
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })
@@ -118,7 +118,7 @@ describe('Block Service', () => {
   })
 
   it('should return the next block for the given height', async () => {
-    jest.setTimeout(30000) // This function easily takes 10-20 seconds to resolve, not sure why
+    jest.setTimeout(60000) // This function easily takes 10-20 seconds to resolve, not sure why
     const data = await blockService.findNext(1000000)
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)
   })

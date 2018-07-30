@@ -35,7 +35,7 @@ describe('isDelegateByPublicKey mixin', () => {
 
 describe('rawCurrency mixin', () => {
   it('should display selected cryptocurrency with 8 digits or less', () => {
-    store.dispatch('network/setToken', 'BPL')
+    store.dispatch('network/setTokenShortName', 'BPL')
     expect(mixins.rawCurrency(10.1234567891234, 'BPL')).toEqual(displayCrypto(10.12345679))
     expect(mixins.rawCurrency(10.1234567891234, 'ETH')).toEqual(displayCrypto(10.12345679))
     expect(mixins.rawCurrency(10.1234567891234, 'BTC')).toEqual(displayCrypto(10.12345679))
@@ -43,7 +43,7 @@ describe('rawCurrency mixin', () => {
   })
 
   it('should display non-cryptocurrency always with 2 digits', () => {
-    store.dispatch('network/setToken', 'BPL')
+    store.dispatch('network/setTokenShortName', 'BPL')
     expect(mixins.rawCurrency(10.1234567891, 'USD')).toEqual(displayFiat(10.12))
     expect(mixins.rawCurrency(10.1234567891, 'AUD')).toEqual(displayFiat(10.12))
     expect(mixins.rawCurrency(10.1234567891, 'EUR')).toEqual(displayFiat(10.12))
@@ -86,6 +86,13 @@ describe('readableCrypto mixin', () => {
 
 describe('networkToken mixin', () => {
   it('should return the set network token', () => {
+    store.dispatch('network/setToken', 'Blockpool')
+    expect(mixins.networkToken()).toEqual('Blockpool')
+  })
+})
+
+describe('networkTokenShortName mixin', () => {
+  it('should return the set network token short name', () => {
     store.dispatch('network/setToken', 'BPL')
     expect(mixins.networkToken()).toEqual('BPL')
   })
