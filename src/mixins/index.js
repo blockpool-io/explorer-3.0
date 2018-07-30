@@ -23,6 +23,7 @@ const methods = {
     const epoch = store.getters['network/epochTime']
 
     return moment(epoch)
+      .utc()
       .add(Math.abs(typeof timeZoneOffset !== 'undefined' ? timeZoneOffset : new Date().getTimezoneOffset()), 'minutes')
       .add(value, 'seconds')
       .format('DD.MM.YYYY HH:mm:ss')
@@ -33,6 +34,7 @@ const methods = {
 
     const getTime = function (t) {
       return moment(epoch)
+        .utc()
         .add(t, 'seconds')
     }
 

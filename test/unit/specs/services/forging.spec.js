@@ -60,17 +60,12 @@ describe('Forging Service', () => {
     // Note: this doesn't test all possible paths, but the function will be removed with V2 anyway
   })
 
-  it('should return a correct epoch stamp', () => {
-    const data = forgingService.epochStamp(123456789)
-    expect(data).toEqual(new Date('2021-02-17T10:33:09.000Z'))
-  })
-
   it('should return the correct round', () => {
-    expect(forgingService.round(4781111)).toBe(93747 + 1)
+    expect(forgingService.round(4781387)).toBe(23787 + 1)
   })
 
   it('should return the correct round, when modulo is 0', () => {
-    expect(forgingService.round(4781097)).toBe(93747)
+    expect(forgingService.round(4781187)).toBe(23787)
   })
 
   it('should return 0 when given round is not a number', () => {

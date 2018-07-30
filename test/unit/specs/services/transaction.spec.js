@@ -29,7 +29,7 @@ describe('Transaction Service', () => {
 
   it('should find a transaction by its id', async () => {
     const data = await transactionService.find('7efc7dbadfa439a6e21a2bce3d3bbaf63236db92948d33bb241b57fbf6713ce0')
-    expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(blockPropertyArray.concat(['height', 'asset', 'recipientId', 'votes']).sort()))
+    expect(Object.keys(data).sort()).toEqual(expect.arrayContaining(blockPropertyArray.concat(['height', 'asset', 'recipientId']).sort()))
   })
 
   it('should fail if no transaction can be found for given id', async () => {

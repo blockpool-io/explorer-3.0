@@ -3,10 +3,10 @@
     <content-header>{{ $t("Top Wallets") }}</content-header>
     <section class="page-section py-5 md:py-10">
       <div class="hidden sm:block">
-        <table-wallets :wallets="wallets" :total="supply"></table-wallets>
+        <table-wallets :wallets="wallets" :total="Number(supply)"></table-wallets>
       </div>
       <div class="sm:hidden">
-        <table-wallets-mobile :wallets="wallets" :total="supply"></table-wallets-mobile>
+        <table-wallets-mobile :wallets="wallets" :total="Number(supply)"></table-wallets-mobile>
       </div>
       <paginator v-if="wallets" :start="+this.$route.params.page"></paginator>
     </section>
