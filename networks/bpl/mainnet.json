@@ -4,6 +4,7 @@
   "alias": "Main",
   "interval": 15,
   "activeDelegates": 201,
+  "epochTime": "2017-03-21T13:00:00.000Z",
   "rewardOffset": 75600,
   "currencies": {
     "AUD": "A$",
