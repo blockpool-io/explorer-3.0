@@ -64,6 +64,7 @@
   "Last block": "Last block",
   "from transactions": "from 0 transactions | from 1 transaction | from {count} transactions",
   "Total Forged (token)": "Total Forged ({token})",
+  "Forged (token)": "Forged ({token})",
   "Forging": "Forging",
   "Missing": "Missing",
   "Missed block, Awaiting Slot": "Missed block, Awaiting Slot",

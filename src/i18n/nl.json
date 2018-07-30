@@ -62,6 +62,7 @@
   "Last block": "Laatste block",
   "from transactions": "van 0 transacties | van 1 transactie | van {count} transacties",
   "Total Forged (token)": "Totaal geforged ({token})",
+  "Forged (token)": "Geforged ({token})",
   "Forging": "Aan het forgen",
   "Missing": "Missend",
   "Missed block, Awaiting Slot": "Block gemist, Wachten op plek",

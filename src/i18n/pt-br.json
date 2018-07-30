@@ -62,6 +62,7 @@
   "Last block": "Bloco anterior",
   "from transactions": "a partir de 0 transações | a partir de 1 transação | a partir de {count} transações",
   "Total Forged (token)": "Total Forjado ({token})",
+  "Forged (token)": "Forjado ({token})",
   "Forging": "Forjando",
   "Missing": "Ausente",
   "Missed block, Awaiting Slot": "Bloco foi perdido, Aguardando Slot",
