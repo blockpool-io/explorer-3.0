@@ -126,16 +126,13 @@ module.exports = {
       .waitForElementVisible('main.theme-light')
       .waitForElementVisible('button.border-transparent')
       .click('button.border-transparent')
-
     browser
       .useXpath()
       .waitForElementVisible("//button[contains(., 'Top Wallets')]")
       .click("//button[contains(., 'Top Wallets')]")
       .pause(1000)
-      
     browser
-      .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible("//h1[text() = 'Top Wallets']")
       .assert.urlContains('/top-wallets')
   },
 
@@ -147,8 +144,7 @@ module.exports = {
       .click("//button[contains(., 'Delegate Monitor')]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible("//h1[text() = 'Delegate Monitor']")
       .assert.urlContains('/delegate-monitor')
   },
 
@@ -160,8 +156,7 @@ module.exports = {
       .click("//button[contains(., 'Home')]")
       .pause(500)
     browser
-      .useCss()
-      .waitForElementVisible('div.table-component')
+      .waitForElementVisible("//h1[text() = 'Latest transactions and blocks']")
       .assert.urlContains('/#')
   },
 
@@ -190,7 +185,7 @@ module.exports = {
         const blockId = result.value
 
         browser
-          .pause(8000)
+          .pause(15500)
           .getText("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[2]", function(result) {
             browser.assert.notEqual(result.value, blockId)
           })
