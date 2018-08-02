@@ -33,9 +33,7 @@ const methods = {
     const epoch = store.getters['network/epochTime']
 
     const getTime = function (t) {
-      return moment(epoch)
-        .utc()
-        .add(t, 'seconds')
+      return moment(epoch).utc().add(t, 'seconds')
     }
 
     const momentTime = getTime(time)
