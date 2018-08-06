@@ -4,7 +4,6 @@
   "alias": "Testnet",
   "activeDelegates": 201,
   "epochTime": "2017-03-21T13:00:00.000Z",
-  "rewardOffset": 75600,
   "currencies": [],
   "knownWallets": {
     "BCWzC3cB225kNfsMum6taHWsqGE6gLQHKQ": "Genesis Wallet"
