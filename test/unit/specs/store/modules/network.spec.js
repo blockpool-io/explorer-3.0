@@ -31,12 +31,6 @@ describe('network store modules', () => {
     expect(store.getters['network/activeDelegates']).toEqual('setActiveDelegates')
   })
 
-  it('should set the network reward offset', () => {
-    store.dispatch('network/setRewardOffset', 'setRewardOffset')
-
-    expect(store.getters['network/rewardOffset']).toEqual('setRewardOffset')
-  })
-
   it('should set the network token', () => {
     store.dispatch('network/setToken', 'setToken')
 
