@@ -93,7 +93,7 @@ module.exports = {
       .click("//a[contains(@href, '/blocks/1') and text() = 'See all']")
       .waitForElementVisible("//h1[contains(., 'Blocks')]")
       .waitForElementVisible('//h1//span')
-      .expect.element("//h1//span[contains(., 'arkpool')]").to.be.visible
+      .expect.element("//h1//span[contains(., 'bpl_dev_del')]").to.be.visible
     browser
       .assert.urlContains('/wallets/BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq/blocks/1')
   },
