@@ -2,8 +2,9 @@
   "title": "BPL Explorer",
   "server": "http://13.56.163.57:9030/api",
   "alias": "Main",
+  "interval": 15,
   "activeDelegates": 201,
-  "rewardOffset": 75600,
+  "epochTime": "2017-03-21T13:00:00.000Z",
   "currencies": {
     "AUD": "A$",
     "BRL": "R$",

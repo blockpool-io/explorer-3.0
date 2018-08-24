@@ -64,7 +64,7 @@ describe('Search Service', () => {
   })
 
   it('should return block when searching for existing block id', async () => {
-    jest.setTimeout(30000) // This function easily takes 10-30 seconds to resolve, not sure why
+    jest.setTimeout(60000) // This function easily takes 10-30 seconds to resolve, not sure why
     const data = await searchService.findByBlockId('11217043835834306811')
     expect(Object.keys(data.block).sort()).toEqual([
       'id',
@@ -87,7 +87,7 @@ describe('Search Service', () => {
   })
 
   it('should fail when searching for non-existing block id', async () => {
-    jest.setTimeout(30000) // This function easily takes 10-30 seconds to resolve, not sure why
+    jest.setTimeout(60000) // This function easily takes 10-30 seconds to resolve, not sure why
     await expect(searchService.findByBlockId('0')).rejects.toThrow()
   })
 

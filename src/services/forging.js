@@ -1,4 +1,5 @@
 import store from '@/store'
+import mixins from '@/mixins'
 
 const ForgeStatus = Object.freeze({
   FORGING: 0,
@@ -9,9 +10,6 @@ const ForgeStatus = Object.freeze({
   AWAITING_STATUS: 5
 })
 
-/**
- * @TODO - Remove this when Core 2.0 is released.
- */
 class ForgingService {
   status(delegate, height) {
     const status = {
@@ -20,7 +18,7 @@ class ForgingService {
 
     if (delegate.blocksAt && delegate.blocks.length > 0) {
       status.lastBlock = delegate.blocks[0]
-      status.blockAt = this.epochStamp(status.lastBlock.timestamp)
+      status.blockAt = mixins.readableTimestamp(status.lastBlock.timestamp)
       status.networkRound = this.round(height)
       status.delegateRound = this.round(status.lastBlock.height)
       status.awaitingSlot = status.networkRound - status.delegateRound
@@ -66,10 +64,6 @@ class ForgingService {
     delegate.status = [status.code, delegate.rate].join(':')
 
     return status
-  }
-
-  epochStamp(d) {
-    return new Date((((Date.UTC(2017, 2, 21, 13, 0, 0, 0) / 1000) + d) * 1000))
   }
 
   round(height) {

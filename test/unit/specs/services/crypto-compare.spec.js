@@ -4,7 +4,7 @@ import store from '@/store'
 describe('CryptoCompare Service', () => {
   beforeAll(() => {
     store.dispatch('network/setServer', 'http://13.56.163.57:9030/api')
-    store.dispatch('network/setToken', 'BPL')
+    store.dispatch('network/setTokenShortName', 'BPL')
     store.dispatch('currency/setName', 'USD')
   })
 

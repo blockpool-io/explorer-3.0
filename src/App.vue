@@ -37,8 +37,9 @@ export default {
 
     this.$store.dispatch('network/setServer', network.server)
     this.$store.dispatch('network/setAlias', network.alias)
+    this.$store.dispatch('network/setNetworkInterval', network.interval)
+    this.$store.dispatch('network/setNetworkEpochTime', network.epochTime)
     this.$store.dispatch('network/setActiveDelegates', network.activeDelegates)
-    this.$store.dispatch('network/setRewardOffset', network.rewardOffset)
     this.$store.dispatch('network/setCurrencies', network.currencies)
     this.$store.dispatch('network/setKnownWallets', network.knownWallets)
 
@@ -55,11 +56,12 @@ export default {
     }
 
     const response = await LoaderService.config()
-    this.$store.dispatch('network/setToken', response.network.client.token)
-    this.$store.dispatch('network/setTokenShortName', response.network.client.tokenShortName)
-    this.$store.dispatch('network/setSymbol', response.network.client.symbol)
+    this.$store.dispatch('network/setToken', response.network.token)
+    this.$store.dispatch('network/setTokenShortName', response.network.tokenShortName)
+    this.$store.dispatch('network/setSymbol', response.network.symbol)
     this.$store.dispatch('network/setNethash', response.network.nethash)
     this.$store.dispatch('network/setNetworkInterval', response.config.interval)
+    this.$store.dispatch('network/setNetworkEpochTime', response.config.epochTime)
     this.$store.dispatch('network/setActiveDelegates', response.config.delegates)
 
     this.$store.dispatch(

@@ -74,7 +74,7 @@ module.exports = {
     browser
       .useXpath()
       .expect.element("//div[text() = 'Delegate']").to.be.present
-    browser.expect.element("//div[text() = 'Uptime']").to.be.present
+    browser.expect.element("//div[text() = 'Productivity']").to.be.present
     browser.expect.element("//div[text() = 'Rank/Status']").to.be.present
     browser.expect.element("//div[text() = 'Approval']").to.be.present
     browser.expect.element("//div[text() = 'Forged']").to.be.present
@@ -91,7 +91,9 @@ module.exports = {
   'it should be possible to show the list of forged blocks': function (browser) {
     browser
       .click("//a[contains(@href, '/blocks/1') and text() = 'See all']")
-      .waitForElementVisible("//h1[text() = 'Blocks']")
+      .waitForElementVisible("//h1[contains(., 'Blocks')]")
+      .waitForElementVisible('//h1//span')
+      .expect.element("//h1//span[contains(., 'bpl_dev_del')]").to.be.visible
     browser
       .assert.urlContains('/wallets/BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq/blocks/1')
   },

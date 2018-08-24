@@ -121,7 +121,7 @@ const router = new Router({
       component: DelegateMonitorComponent
     },
     {
-      path: 'top-wallets',
+      path: '/top-wallets',
       redirect: to => ({ name: 'top-wallets', params: { page: 1 } })
     },
     {
@@ -135,7 +135,7 @@ const router = new Router({
     //   component: StatisticsComponent
     // },
     {
-      path: '404',
+      path: '/404',
       name: '404',
       component: NotFoundComponent
     },

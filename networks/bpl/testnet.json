@@ -3,7 +3,7 @@
   "server": "http://35.180.64.83:9028/api",
   "alias": "Testnet",
   "activeDelegates": 201,
-  "rewardOffset": 75600,
+  "epochTime": "2017-03-21T13:00:00.000Z",
   "currencies": [],
   "knownWallets": {
     "BCWzC3cB225kNfsMum6taHWsqGE6gLQHKQ": "Genesis Wallet"

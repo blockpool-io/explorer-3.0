@@ -20,34 +20,20 @@ const methods = {
   },
 
   readableTimestamp(value, timeZoneOffset) {
-    return moment()
+    const epoch = store.getters['network/epochTime']
+
+    return moment(epoch)
       .utc()
-      .set({
-        year: 2017,
-        month: 2,
-        date: 21,
-        hour: 13,
-        minute: 0,
-        second: 0,
-      })
       .add(Math.abs(typeof timeZoneOffset !== 'undefined' ? timeZoneOffset : new Date().getTimezoneOffset()), 'minutes')
       .add(value, 'seconds')
       .format('DD.MM.YYYY HH:mm:ss')
   },
 
   readableTimestampAgo(time, compareTime) {
+    const epoch = store.getters['network/epochTime']
+
     const getTime = function (t) {
-      return moment()
-        .utc()
-        .set({
-          year: 2017,
-          month: 2,
-          date: 21,
-          hour: 13,
-          minute: 0,
-          second: 0,
-        })
-        .add(t, 'seconds')
+      return moment(epoch).utc().add(t, 'seconds')
     }
 
     const momentTime = getTime(time)

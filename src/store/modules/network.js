@@ -8,7 +8,6 @@ export default {
     nethash: null,
     alias: null,
     activeDelegates: 201,
-    rewardOffset: 201,
     token: null,
     tokenShortName: null,
     symbol: null,
@@ -16,7 +15,8 @@ export default {
     knownWallets: [],
     supply: 0,
     height: 0,
-    interval: 15
+    interval: 15,
+    epochTime: null
   },
   mutations: {
     [types.SET_NETWORK_DEFAULTS](state, payload) {
@@ -33,9 +33,6 @@ export default {
     },
     [types.SET_NETWORK_ACTIVE_DELEGATES](state, payload) {
       state.activeDelegates = payload.value
-    },
-    [types.SET_NETWORK_REWARD_OFFSET](state, payload) {
-      state.rewardOffset = payload.value
     },
     [types.SET_NETWORK_TOKEN](state, payload) {
       state.token = payload.value
@@ -60,6 +57,9 @@ export default {
     },
     [types.SET_NETWORK_INTERVAL](state, payload) {
       state.interval = payload.value
+    },
+    [types.SET_NETWORK_EPOCHTIME](state, payload) {
+      state.epochTime = payload.value
     }
   },
   actions: {
@@ -90,12 +90,6 @@ export default {
     setActiveDelegates: ({commit}, value) => {
       commit({
         type: types.SET_NETWORK_ACTIVE_DELEGATES,
-        value
-      })
-    },
-    setRewardOffset: ({commit}, value) => {
-      commit({
-        type: types.SET_NETWORK_REWARD_OFFSET,
         value
       })
     },
@@ -146,6 +140,12 @@ export default {
         type: types.SET_NETWORK_INTERVAL,
         value
       })
+    },
+    setNetworkEpochTime: ({commit}, value) => {
+      commit({
+        type: types.SET_NETWORK_EPOCHTIME,
+        value
+      })
     }
   },
   getters: {
@@ -154,7 +154,6 @@ export default {
     nethash: state => state.nethash,
     alias: state => state.alias,
     activeDelegates: state => state.activeDelegates,
-    rewardOffset: state => state.rewardOffset,
     token: state => state.token,
     tokenShortName: state => state.tokenShortName,
     symbol: state => state.symbol,
@@ -162,6 +161,7 @@ export default {
     knownWallets: state => state.knownWallets,
     supply: state => state.supply,
     height: state => state.height,
-    interval: state => state.interval
+    interval: state => state.interval,
+    epochTime: state => state.epochTime
   }
 }

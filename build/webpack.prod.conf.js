@@ -15,6 +15,7 @@ const glob = require('glob-all')
 const gitRevision = require('./utils/git-revision')()
 const argumentParser = require('./argument-parser')
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const safeParser = require('postcss-safe-parser')
 
 class TailwindExtractor {
   static extract(content) {
@@ -22,7 +23,7 @@ class TailwindExtractor {
   }
 }
 
-const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
+const createWebpackConfig = (baseUrl, ticker, network, networkConfig, routerMode) => {
   return merge(baseWebpackConfig, {
     module: {
       rules: utils.styleLoaders({
@@ -44,6 +45,7 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
       new webpack.DefinePlugin({
         'process.env': {
           ...require('../config/prod.env'),
+          ...{TICKER_CONFIG: `"${ticker}"`},
           ...{EXPLORER_CONFIG: `"${network}"`},
           ...{ROUTER_MODE: `"${routerMode}"`}
         },
@@ -78,6 +80,9 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
           'table-component__th--sort-asc', 'table-component__th--sort-desc',
           'tr', 'td'
         ],
+        whitelistPatterns: [
+          /^tooltip-bg-/
+        ],
         extractors: [{
           extractor: TailwindExtractor,
           extensions: ["html", "js", "vue"]
@@ -87,8 +92,8 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
       // duplicated CSS from different components can be deduped.
       new OptimizeCSSPlugin({
         cssProcessorOptions: config.build.productionSourceMap
-          ? { safe: true, map: { inline: false } }
-          : { safe: true }
+          ? { parser: safeParser, map: { inline: false } }
+          : { parser: safeParser }
       }),
       // generate dist index.html with correct asset hash for caching.
       // you can customize output by editing /index.html
@@ -160,7 +165,7 @@ const createWebpackConfig = (baseUrl, network, networkConfig, routerMode) => {
 module.exports = (env) => {
   const args = argumentParser(env)
 
-  const webpackConfig = createWebpackConfig(args.baseUrl, args.network, args.networkConfig, args.routerMode)
+  const webpackConfig = createWebpackConfig(args.baseUrl, args.ticker, args.network, args.networkConfig, args.routerMode)
   webpackConfig.mode = 'production'
 
   if (config.build.productionGzip) {
