@@ -99,9 +99,10 @@ const methods = {
     }).format(value)
   },
 
-  readableCurrency(value, showDecimals = true, currency = null, normalise = true) {
+  readableCurrency(value, showDecimals = true, rate = null, currency = null, normalise = true) {
     const currencyName = currency || store.getters['currency/name']
-    value *= store.getters['currency/rate']
+
+    value *= rate || store.getters['currency/rate']
 
     if (normalise) {
       value /= Math.pow(10, 8)
