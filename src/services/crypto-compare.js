@@ -49,18 +49,11 @@ class CryptoCompareService {
       return null
     }
 
+    const networkEpochTime = store.getters['network/networkEpochTime']
+
     let ts = moment()
-      .utc()
-      .set({
-        year: 2017,
-        month: 2,
-        date: 21,
-        hour: 13,
-        minute: 0,
-        second: 0
-      })
+      .set(networkEpochTime)
       .add(timestamp, 'seconds')
-      .unix()
 
     // get last second of the day as unix timestamp
     ts = ts - (ts % 86400) + 86400 - 1
@@ -72,7 +65,7 @@ class CryptoCompareService {
       return lastConversion.rate
     }
 
-    const token = store.getters['network/token']
+    const token = store.getters['network/tokenShortName']
     const cache = JSON.parse(localStorage.getItem(`rates_${targetCurrency}`))
 
     if (cache && cache.hasOwnProperty(timestamp)) {
