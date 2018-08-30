@@ -5,7 +5,7 @@ export default {
   state: {
     name: 'BPL',
     rate: 1,
-    symbol: 'β'
+    symbol: 'β',
     lastConversion: {
       to: 'USD',
       timestamp: 1,
