@@ -27,7 +27,7 @@ const methods = {
 
     return moment(epoch)
       .utc()
-      .add(Math.abs(typeof timeZoneOffset !== 'undefined' ? timeZoneOffset : new Date().getTimezoneOffset()), 'minutes')
+      .add((typeof timeZoneOffset !== 'undefined' ? timeZoneOffset : new Date().getTimezoneOffset()) * (-1), 'minutes')
       .add(value, 'seconds')
       .format('L LTS')
   },
