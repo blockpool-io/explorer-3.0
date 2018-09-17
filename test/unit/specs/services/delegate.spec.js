@@ -90,9 +90,9 @@ describe('Delegate Service', () => {
   })
 
   it('should return a list of active delegates and their stats', async() => {
-    jest.setTimeout(60000) // Allow this function to take longer than the specified 5 seconds
+    jest.setTimeout(30000) // Allow this function to take longer than the specified 5 seconds
     const data = await delegateService.activeDelegates()
-    expect(data.delegateCount).toBeDefined()
+    expect(data.totalCount).toBeDefined()
     expect(data.delegates).toBeDefined()
     expect(Object.keys(data.delegates[0]).sort()).toEqual([
       'username',

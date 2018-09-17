@@ -11,6 +11,7 @@ const blockPropertyArray = [
   'senderId',
   'senderPublicKey',
   'signature',
+  'signSignature',
   'confirmations'
 ].sort()
 // Note: asset, recipientId, signSignature and vendorField can also be returned, but are optional
