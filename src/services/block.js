@@ -2,13 +2,34 @@ import NodeService from '@/services/node'
 
 class BlockService {
   async latest(limit = 25) {
-    const response = await NodeService.get('blocks', {
-      params: {
-        orderBy: 'height:desc',
-        limit
-      }
-    })
-    return response.data.blocks
+    const requests = []
+    let offset = 0
+    let index = 0
+
+    while (limit > 0) {
+      offset = index * 100
+
+      requests.push(
+        NodeService.get('blocks', {
+          params: {
+            orderBy: 'height:desc',
+            limit: (limit < 100) ? limit : 100,
+            offset
+          }
+        })
+      )
+
+      limit -= 100
+      index++
+    }
+
+    const results = await Promise.all(requests)
+
+    return results
+      .map(result => {
+        return result.data.blocks
+      })
+      .reduce((a, b) => [...a, ...b])
   }
 
   async last() {

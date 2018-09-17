@@ -32,6 +32,13 @@ describe('Block Service', () => {
     expect(data[0].height < data[1].height)
   })
 
+  it('should return the latest blocks with given limit', async () => {
+    const data = await blockService.latest(250)
+    expect(data).toHaveLength(250)
+    expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray)
+    expect(data[0].height < data[1].height)
+  })
+
   it('should return the last block', async () => {
     const data = await blockService.last()
     expect(Object.keys(data).sort()).toEqual(blockPropertyArray)

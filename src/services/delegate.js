@@ -124,8 +124,8 @@ class DelegateService {
     })
     const delegateCount = response.data.totalCount
 
-    // Last Block (from last 500 Blocks)
-    const blocks = await block.latest(500)
+    // Last Block (from last 402 Blocks)
+    const blocks = await block.latest(402)
     const lastBlocksFetched = JSON.parse(sessionStorage.getItem('lastBlocksFetched') || '[]')
     sessionStorage.setItem('lastBlocksFetched', JSON.stringify(blocks))
 
