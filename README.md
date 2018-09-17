@@ -1,5 +1,9 @@
 # BPL Explorer 3.0
 
+<p align="center">
+    <img src="/banner.png" />
+</p>
+
 > Designed and developed from the ground-up, using lean & fast developmental frameworks (Tailwind CSS & Vue.JS).
 
 [![Build Status](https://badgen.now.sh/travis/blockpool-io/bpl-explorer-3.0/master)](https://travis-ci.org/blockpool-io/bpl-explorer-3.0)
