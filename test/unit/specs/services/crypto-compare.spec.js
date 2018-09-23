@@ -3,7 +3,7 @@ import store from '@/store'
 
 describe('CryptoCompare Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setServer', 'http://13.56.163.57:9030/api')
+    store.dispatch('network/setServer', 'http://s01.mc.blockpool.io:9030/api')
     store.dispatch('network/setTokenShortName', 'BPL')
     store.dispatch('network/setAlias', 'Main')
     store.dispatch('currency/setName', 'USD')

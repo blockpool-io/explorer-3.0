@@ -18,7 +18,7 @@ const blockPropertyArray = [
 
 describe('Transaction Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setServer', 'http://13.56.163.57:9030/api')
+    store.dispatch('network/setServer', 'http://s01.mc.blockpool.io:9030/api')
   })
 
   it('should return the latest transactions ordered by timestamp descending', async () => {
