@@ -49,11 +49,8 @@ class CryptoCompareService {
       return null
     }
 
-    const networkEpochTime = store.getters['network/networkEpochTime']
-
-    let ts = moment()
-      .set(networkEpochTime)
-      .add(timestamp, 'seconds')
+    const networkEpochTime = store.getters['network/epochTime']
+    let ts = moment(networkEpochTime).add(timestamp, 'seconds').unix()
 
     // get last second of the day as unix timestamp
     ts = ts - (ts % 86400) + 86400 - 1
