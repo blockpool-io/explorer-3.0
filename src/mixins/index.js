@@ -108,7 +108,7 @@ const methods = {
       value /= Math.pow(10, 8)
     }
 
-    return [store.getters['network/token'], 'BTC', 'ETH', 'LTC'].some(
+    return [store.getters['network/tokenShortName'], 'BTC', 'ETH', 'LTC'].some(
       c => currencyName.indexOf(c) > -1
     )
       ? value.toLocaleString(locale, {
@@ -118,6 +118,8 @@ const methods = {
       : value.toLocaleString(locale, {
         minimumFractionDigits: showDecimals ? 2 : 0,
         maximumFractionDigits: showDecimals ? 2 : 0,
+        style: 'currency',
+        currency: currencyName
       })
   },
 
