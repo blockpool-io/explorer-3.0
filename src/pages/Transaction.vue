@@ -44,7 +44,7 @@
 
         <div class="list-row-border-b">
           <div>{{ $t("Amount") }}</div>
-          <div v-if="average" v-tooltip="{ content: `${readableCurrency(transaction.amount, average)} ${currencySymbol}`, placement: 'left' }">{{ readableCrypto(transaction.amount) }}</div>
+          <div v-if="average" v-tooltip="{ content: `${readableCurrency(transaction.amount, average)}`, placement: 'left' }">{{ readableCrypto(transaction.amount) }}</div>
           <div v-else>{{ readableCrypto(transaction.amount) }}</div>
         </div>
 
@@ -89,6 +89,10 @@ export default {
     ...mapGetters('currency', { currencySymbol: 'symbol' })
   },
 
+  async mounted() {
+    await this.prepareComponent()
+  },
+
   async beforeRouteEnter(to, from, next) {
     try {
       const transaction = await TransactionService.find(to.params.id)
@@ -113,6 +117,13 @@ export default {
   },
 
   methods: {
+    async prepareComponent() {
+      this.$store.watch(state => state.currency.name, value => this.updateAverage())
+    },
+    async updateAverage() {
+      const average = await CryptoCompareService.dailyAverage(this.transaction.timestamp)
+      this.setAverage(average)
+    },
     setTransaction(transaction) {
       this.transaction = transaction
     },

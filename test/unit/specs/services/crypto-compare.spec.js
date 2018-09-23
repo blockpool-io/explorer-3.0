@@ -3,8 +3,9 @@ import store from '@/store'
 
 describe('CryptoCompare Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setServer', 'http://13.56.163.57:9030/api')
+    store.dispatch('network/setServer', 'http://s01.mc.blockpool.io:9030/api')
     store.dispatch('network/setTokenShortName', 'BPL')
+    store.dispatch('network/setNetworkEpochTime', '2017-03-21T13:00:00.000Z')
     store.dispatch('network/setAlias', 'Main')
     store.dispatch('currency/setName', 'USD')
   })
@@ -50,7 +51,7 @@ describe('CryptoCompare Service', () => {
     store.dispatch('currency/setName', 'USD')
     const data = await cryptoCompareService.dailyAverage(45488712)
     console.log(data)
-    expect(data).toBe(0.04846)
+    expect(data).toBe(0.06022)
   })
 
   it('should return null for a given timestamp and invalid currency', async () => {

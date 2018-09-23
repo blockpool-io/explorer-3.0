@@ -22,12 +22,19 @@ const blockPropertyArray = [
 
 describe('Block Service', () => {
   beforeAll(() => {
-    store.dispatch('network/setServer', 'http://13.56.163.57:9030/api')
+    store.dispatch('network/setServer', 'http://s01.mc.blockpool.io:9030/api')
   })
 
   it('should return the latest blocks', async () => {
     const data = await blockService.latest()
     expect(data).toHaveLength(25)
+    expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray)
+    expect(data[0].height < data[1].height)
+  })
+
+  it('should return the latest blocks with given limit', async () => {
+    const data = await blockService.latest(250)
+    expect(data).toHaveLength(250)
     expect(Object.keys(data[0]).sort()).toEqual(blockPropertyArray)
     expect(data[0].height < data[1].height)
   })
