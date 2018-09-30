@@ -108,13 +108,20 @@ const methods = {
       value /= Math.pow(10, 8)
     }
 
+    const cryptos = {
+      'BPL': 'β',
+      'BTC': 'Ƀ',
+      'ETH': 'Ξ',
+      'LTC': 'Ł'
+    }
+
     return [store.getters['network/tokenShortName'], 'BTC', 'ETH', 'LTC'].some(
       c => currencyName.indexOf(c) > -1
     )
-      ? value.toLocaleString(locale, {
+      ? `${value.toLocaleString(locale, {
         minimumFractionDigits: showDecimals ? 8 : 0,
         maximumFractionDigits: showDecimals ? 8 : 0,
-      })
+      })} ${cryptos[currencyName]}`
       : value.toLocaleString(locale, {
         minimumFractionDigits: showDecimals ? 2 : 0,
         maximumFractionDigits: showDecimals ? 2 : 0,
@@ -147,12 +154,11 @@ const methods = {
 
   percentageString(value, decimals = 2) {
     if (typeof value !== 'undefined') {
-      value = value.toLocaleString(locale, {
+      return (value / 100).toLocaleString(locale, {
         minimumFractionDigits: decimals,
         maximumFractionDigits: decimals,
+        style: 'percent'
       })
-
-      return value + '%'
     }
 
     return '-'
