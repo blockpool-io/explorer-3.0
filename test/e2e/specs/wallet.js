@@ -47,6 +47,27 @@ module.exports = {
     browser
       .expect.element('button.show-more-button').to.be.visible
   },
+  
+  'it should be possible to click on the show more button': function (browser) {
+    browser
+      .useCss()
+      .waitForElementVisible('button.show-more-button')
+      .click('button.show-more-button')
+    browser
+      .assert.urlContains('wallets/BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq/transactions/all/2')
+  },
+
+  'it should be possible to switch transaction type': function (browser) {
+    browser
+      .useXpath()
+      .expect.element("//span[contains(., 'Transactions')]").to.be.present
+    browser
+      .click("//div[contains(., 'Type')]/following-sibling::div//span")
+      .waitForElementVisible("//div[contains(., 'Type')]/following-sibling::div//ul//li[2]//a")
+    browser
+      .click("//div[contains(., 'Type')]/following-sibling::div//ul//li[2]//a")
+      .assert.urlContains('wallets/BAqi4Y6E6bpQzzYrWbuMCiYXkhogcwRGrq/transactions/sent/1')
+  },
 
   'it should contain transaction tabs': function (browser) {
     browser

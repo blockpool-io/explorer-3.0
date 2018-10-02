@@ -96,24 +96,31 @@ module.exports = {
       .assert.containsText('h1', 'Wallet Summary')
   },
 
-  'it should be possible to click on the recipient': function (browser) {
+  'it should be possible to click on the recipient if it contains a link': function (browser) {
     const devServer = browser.globals.devServerURL + '/#/transactions/1'
 
     browser
       .url(devServer)
       .waitForElementVisible('main.theme-light')
+    browser
       .useXpath()
-      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
-    browser
-      .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
-      .pause(500)
-    browser
-      .useCss()
-      .waitForElementVisible('div.table-component')
-      .assert.urlContains('/wallets/')
-    browser
-      .waitForElementVisible('h1')
-      .assert.containsText('h1', 'Wallet Summary')
-      .end()
+      .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]")
+      .element('xpath', "//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]", (result) => {
+        if (result.status === -1) {
+          console.log('No link present')
+        } else {
+          console.log('Link is present')
+          browser
+            .waitForElementVisible("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
+            .click("//tbody[contains(@class, 'table-component__table__body')]//tr[1]//td[4]//a[1]")
+            .pause(500)
+          browser
+            .useCss()
+            .waitForElementVisible('h1')
+            .assert.containsText('h1', 'Wallet Summary')
+            .assert.urlContains('/wallets/')
+            .end()
+        }
+      })
   }
 }
