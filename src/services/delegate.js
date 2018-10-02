@@ -124,8 +124,8 @@ class DelegateService {
     })
     const delegateCount = response.data.totalCount
 
-    // Last Block (from last 402 Blocks)
-    const blocks = await block.latest(402)
+    // Last Block (from last 480 Blocks)
+    const blocks = await block.latest(480)
     const lastBlocksFetched = JSON.parse(sessionStorage.getItem('lastBlocksFetched') || '[]')
     sessionStorage.setItem('lastBlocksFetched', JSON.stringify(blocks))
 
@@ -148,10 +148,10 @@ class DelegateService {
 
     delegates.forEach((delegate) => {
       if (delegate.blocksAt) {
-        // we already have the delegate's last block from looking at the last 500 blocks
+        // we already have the delegate's last block from looking at the last 480 blocks
         requests.push(delegate.blocks[0])
       } else if (lastBlocksFetched.length && lastBlocksFetched[0].height >= blocks[blocks.length - 1].height) {
-        // the delegate's last block is not in the last 500 blocks but we might have saved it in sessionStorage
+        // the delegate's last block is not in the last 480 blocks but we might have saved it in sessionStorage
         // only valid if there is no 'hole' between the last blocks fetched and the current ones
         const lastDel = lastDelegatesLastBlock.find(del => del.publicKey === delegate.publicKey)
         if (lastDel) { requests.push(lastDel.blocks[0]) } else { requests.push(block.lastBlockByPublicKey(delegate.publicKey)) }
