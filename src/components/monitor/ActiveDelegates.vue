@@ -84,7 +84,7 @@ export default {
     lastForgingTime(delegate) {
       const lastBlock = delegate.forgingStatus.lastBlock
 
-      return lastBlock ? this.readableTimestampAgo(lastBlock.timestamp) : this.$i18n.t('Never')
+      return lastBlock ? this.readableTimestampAgo(lastBlock.timestamp) : this.$i18n.t('> 2 hours ago')
     },
 
     statusMessage(row) {
