@@ -154,12 +154,10 @@ class DelegateService {
         // the delegate's last block is not in the last 480 blocks but we might have saved it in sessionStorage
         // only valid if there is no 'hole' between the last blocks fetched and the current ones
         const lastDel = lastDelegatesLastBlock.find(del => del.publicKey === delegate.publicKey)
-        // if (lastDel) { requests.push(lastDel.blocks[0]) } else { requests.push(block.lastBlockByPublicKey(delegate.publicKey)) }
-        if (lastDel) { requests.push(lastDel.blocks[0]) } else { requests.push(null) }
+        if (lastDel) { requests.push(lastDel.blocks[0]) } else { requests.push(block.lastBlockByPublicKey(delegate.publicKey)) }
       } else {
         // last option : make a specific server request to get the delegate's last block
-        // requests.push(block.lastBlockByPublicKey(delegate.publicKey))
-        requests.push(null)
+        requests.push(block.lastBlockByPublicKey(delegate.publicKey))
       }
     })
 
