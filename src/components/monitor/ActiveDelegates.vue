@@ -84,7 +84,7 @@ export default {
     lastForgingTime(delegate) {
       const lastBlock = delegate.forgingStatus.lastBlock
 
-      return lastBlock ? this.readableTimestampAgo(lastBlock.timestamp) : this.$i18n.t('> 2 hours ago')
+      return lastBlock ? this.readableTimestampAgo(lastBlock.timestamp) : this.$i18n.t('Never')
     },
 
     statusMessage(row) {
@@ -94,7 +94,7 @@ export default {
         '2': this.$i18n.t('Not Forging'),
         '3': this.$i18n.t('Awaiting Slot'),
         '4': this.$i18n.t('Missed block, Awaiting Slot'),
-        '5': this.$i18n.t('Not Forging'),
+        '5': this.$i18n.t('Never Forged'),
       }[row.forgingStatus.code]
 
       const lastBlock = row.forgingStatus.lastBlock
@@ -115,7 +115,7 @@ export default {
         '2': '#ef192d', // Not Forging
         '3': '#838a9b', // Awaiting Slot
         '4': '#f6993f', // Missed in previous round, now awaiting Slot
-        '5': '#ef192d', // Not Forging
+        '5': '#ef192d', // Never Forged
       }[row.forgingStatus.code]
     }
   },
