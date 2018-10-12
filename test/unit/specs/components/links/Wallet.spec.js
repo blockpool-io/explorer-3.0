@@ -172,7 +172,6 @@ describe('Link/Wallet', () => {
     it('Should display Vote for type 3', () => {
       store.dispatch('delegates/setDelegates', [ { username: 'TestDelegate', address: testDelegateAddress, publicKey: testDelegatePublicKey } ])
       const wrapper = mount(Wallet, {
-        propsData: { type: 3 },
         propsData: {
           type: 3,
           asset: {

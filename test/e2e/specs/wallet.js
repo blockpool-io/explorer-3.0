@@ -47,7 +47,7 @@ module.exports = {
     browser
       .expect.element('button.show-more-button').to.be.visible
   },
-  
+
   'it should be possible to click on the show more button': function (browser) {
     browser
       .useCss()
