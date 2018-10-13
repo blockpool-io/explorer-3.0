@@ -32,7 +32,7 @@ export default {
 
     async getTotal() {
       const supply = store.getters['network/supply']
-      this.forged = supply - 25000000 * Math.pow(10, 8)
+      this.forged = supply ? supply - 25000000 * Math.pow(10, 8) : 0
     },
 
     async addLastReward() {
