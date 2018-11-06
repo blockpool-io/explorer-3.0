@@ -3,6 +3,7 @@ import store from '@/store'
 
 describe('Search Service', () => {
   beforeAll(() => {
+    jest.setTimeout(60000)
     store.dispatch('network/setServer', 'http://s01.mc.blockpool.io:9030/api')
   })
 
