@@ -81,7 +81,7 @@ export default {
 
     this.$store.dispatch(
       'ui/setNightMode',
-      localStorage.getItem('nightMode') || false
+      localStorage.getItem('nightMode') || ((network.alias === 'Testnet') ? true : false)
     )
 
     this.updateCurrencyRate()

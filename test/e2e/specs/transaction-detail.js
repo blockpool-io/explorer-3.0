@@ -77,6 +77,6 @@ module.exports = {
     browser
       .waitForElementVisible("//h1[text() = 'Block']")
       .assert.urlContains('block/11217043835834306811')
-      .end()
+    browser.end()
   }
 }

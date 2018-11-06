@@ -7,6 +7,7 @@
 > Designed and developed from the ground-up, using lean & fast developmental frameworks (Tailwind CSS & Vue.JS).
 
 [![Build Status](https://badgen.now.sh/circleci/github/blockpool-io/explorer-3.0)](https://circleci.com/gh/blockpool-io/explorer-3.0)
+[![Codecov](https://badgen.now.sh/codecov/c/github/blockpool-io/explorer-3.0)](https://codecov.io/gh/blockpool-io/explorer-3.0)
 [![License: MIT](https://badgen.now.sh/badge/license/MIT/green)](https://opensource.org/licenses/MIT)
 
 You can access it at [https://explorer.blockpool.io/](https://explorer.blockpool.io/)

@@ -4,6 +4,9 @@
 // Disable eslint for .to.not.be.present statements
 /* eslint-disable no-unused-expressions */
 
+const events = require('events')
+events.EventEmitter.defaultMaxListeners = 30
+
 module.exports = {
   // Default homepage test, which also serves as setup for correct url
   'homepage should be available': function (browser) {
@@ -205,6 +208,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['Cryptopia', browser.Keys.ENTER])
       .pause(1000)
@@ -223,6 +227,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['dated', browser.Keys.ENTER])
       .pause(1000)
@@ -241,6 +246,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['GeNeSiS WaLlEt', browser.Keys.ENTER])
       .pause(1000)
@@ -259,6 +265,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['BHtQdXkeqzwa5m4rj516RoMoSAEEFEMsTp', browser.Keys.ENTER])
       .pause(1000)
@@ -277,6 +284,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['11217043835834306811', browser.Keys.ENTER])
       .pause(1000)
@@ -295,6 +303,7 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['7efc7dbadfa439a6e21a2bce3d3bbaf63236db92948d33bb241b57fbf6713ce0', browser.Keys.ENTER])
       .pause(1000)
@@ -313,12 +322,13 @@ module.exports = {
       .waitForElementVisible('input#search')
     browser
       .click('input#search')
+      .pause(500)
       .waitForElementVisible('input.search-input')
       .setValue('input.search-input', ['asdfnothingfoundforthisvalueasdf', browser.Keys.ENTER])
       .pause(1000)
     browser
       .useXpath()
       .waitForElementVisible("//div[contains(@class, 'tooltip-inner') and text() = 'Nothing matched your search']")
-      .end()
+    browser.end()
   }
 }
