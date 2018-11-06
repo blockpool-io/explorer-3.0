@@ -32,6 +32,9 @@ export default {
 
   async created() {
     const network = require(`../networks/${process.env.TICKER_CONFIG}/${process.env.EXPLORER_CONFIG}`)
+    if (network.alias === 'Testnet') {
+      this.$store.dispatch('ui/setNightMode', true)
+    }
 
     this.$store.dispatch('network/setDefaults', network)
 
