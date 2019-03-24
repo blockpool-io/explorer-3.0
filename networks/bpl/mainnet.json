@@ -1,6 +1,6 @@
 {
   "title": "BPL Explorer",
-  "server": "http://13.56.163.57:9030/api",
+  "server": "http://api.blockpool.io/api",
   "alias": "Main",
   "interval": 15,
   "activeDelegates": 201,
