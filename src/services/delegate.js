@@ -114,6 +114,73 @@ class DelegateService {
    * @TODO - Remove this when Core 2.0 is released.
    */
   async activeDelegates() {
+    const roundResponse = await NodeService.get('rounds')
+    const lastForgedResponse = await NodeService.get('rounds/lastForgedBlocks')
+
+    console.log(roundResponse, lastForgedResponse)
+    const activeDelegates = roundResponse.data.activeDelegates
+    const blocks = roundResponse.data.blocks
+    const delegateCount = activeDelegates.length
+
+    const delegates = activeDelegates.map(delegate => {
+      const lastBlock = lastForgedResponse.data.lastBlocks.find(
+        b => b.generatorPublicKey === delegate.publicKey
+      )
+
+      if (lastBlock !== undefined && lastBlock.hasOwnProperty('timestamp')) {
+        delegate.blocks = [lastBlock]
+        delegate.blocksAt = lastBlock.timestamp
+      }
+
+      return delegate
+    })
+
+    sessionStorage.setItem('lastBlocksFetched', JSON.stringify(blocks))
+    sessionStorage.setItem('lastDelegatesLastBlock', JSON.stringify(delegates))
+
+    // Rounds
+    const lastBlock = blocks[blocks.length - 1]
+    const forgerInfo = delegates.reduce((forgers, delegate) => {
+      const isForger = lastBlock.generatorPublicKey === delegate.publicKey
+      if (forgers.hasFoundForger) {
+        forgers.previous.push(delegate.publicKey)
+      } else {
+        forgers.upcoming.push(delegate.pub)
+      }
+      forgers.hasFoundForger = forgers.hasFoundForger || isForger
+      return forgers
+    }, {
+      hasFoundForger: false,
+      previous: [],
+      upcoming: [],
+    })
+    const nextForgers = forgerInfo.upcoming.concat(forgerInfo.previous)
+    const delegatesRounds = delegates.map(delegate => {
+      const delegateIndex = nextForgers.findIndex(
+        d => d === delegate.publicKey
+      )
+
+      delegate.forgingTime = delegateIndex * 8
+      delegate.isRoundDelegate = delegateIndex !== -1
+
+      return delegate
+    })
+
+    // Forging Status
+    const height = lastBlock.height
+    return {
+      delegateCount: delegateCount,
+      delegates: delegatesRounds.map(delegate => {
+        delegate.forgingStatus = forging.status(
+          delegate,
+          height
+        )
+        return delegate
+      })
+    }
+
+
+    /*
     const activeDelegates = store.getters['network/activeDelegates']
 
     const response = await NodeService.get('delegates', {
@@ -197,6 +264,7 @@ class DelegateService {
 
         return delegate
       }) }
+      */
   }
 
   async forged() {
