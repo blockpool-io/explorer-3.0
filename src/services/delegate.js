@@ -117,7 +117,6 @@ class DelegateService {
     const roundResponse = await NodeService.get('rounds')
     const lastForgedResponse = await NodeService.get('rounds/lastForgedBlocks')
 
-    console.log(roundResponse, lastForgedResponse)
     const activeDelegates = roundResponse.data.activeDelegates
     const blocks = roundResponse.data.blocks
     const delegateCount = activeDelegates.length
@@ -154,7 +153,9 @@ class DelegateService {
       previous: [],
       upcoming: [],
     })
+
     const nextForgers = forgerInfo.upcoming.concat(forgerInfo.previous)
+    const supply = store.getters['network/supply']
     const delegatesRounds = delegates.map(delegate => {
       const delegateIndex = nextForgers.findIndex(
         d => d === delegate.publicKey
@@ -162,6 +163,8 @@ class DelegateService {
 
       delegate.forgingTime = delegateIndex * 8
       delegate.isRoundDelegate = delegateIndex !== -1
+
+      delegate.approval = (delegate.vote / supply) * 100
 
       return delegate
     })
@@ -178,93 +181,6 @@ class DelegateService {
         return delegate
       })
     }
-
-
-    /*
-    const activeDelegates = store.getters['network/activeDelegates']
-
-    const response = await NodeService.get('delegates', {
-      params: {
-        orderBy: 'rate:asc',
-        limit: activeDelegates
-      }
-    })
-    const delegateCount = response.data.totalCount
-
-    // Last Block (from last 480 Blocks)
-    const blocks = await block.latest(480)
-    const lastBlocksFetched = JSON.parse(sessionStorage.getItem('lastBlocksFetched') || '[]')
-    sessionStorage.setItem('lastBlocksFetched', JSON.stringify(blocks))
-
-    const delegates = response.data.delegates.map(delegate => {
-      const lastBlock = blocks.find(
-        b => b.generatorPublicKey === delegate.publicKey
-      )
-
-      if (lastBlock !== undefined && lastBlock.hasOwnProperty('timestamp')) {
-        delegate.blocks = [lastBlock]
-        delegate.blocksAt = lastBlock.timestamp
-      }
-
-      return delegate
-    })
-
-    // Last Block (from specific delegate)
-    const requests = []
-    const lastDelegatesLastBlock = JSON.parse(sessionStorage.getItem('lastDelegatesLastBlock') || '[]')
-
-    delegates.forEach((delegate) => {
-      if (delegate.blocksAt) {
-        // we already have the delegate's last block from looking at the last 480 blocks
-        requests.push(delegate.blocks[0])
-      } else if (lastBlocksFetched.length && lastBlocksFetched[0].height >= blocks[blocks.length - 1].height) {
-        // the delegate's last block is not in the last 480 blocks but we might have saved it in sessionStorage
-        // only valid if there is no 'hole' between the last blocks fetched and the current ones
-        const lastDel = lastDelegatesLastBlock.find(del => del.publicKey === delegate.publicKey)
-        if (lastDel) { requests.push(lastDel.blocks[0]) } else { requests.push(block.lastBlockByPublicKey(delegate.publicKey)) }
-      } else {
-        // last option : make a specific server request to get the delegate's last block
-        requests.push(block.lastBlockByPublicKey(delegate.publicKey))
-      }
-    })
-
-    const results = await Promise.all(requests)
-    const delegatesLastBlock = delegates.map((result, index) => {
-      let lastBlock = results[index]
-
-      result.blocks = [lastBlock]
-      result.blocksAt = lastBlock ? lastBlock.timestamp : false
-
-      return result
-    })
-
-    sessionStorage.setItem('lastDelegatesLastBlock', JSON.stringify(delegatesLastBlock))
-
-    // Rounds
-    const nextForgers = await this.nextForgers()
-    const delegatesRounds = delegatesLastBlock.map(delegate => {
-      const delegateIndex = nextForgers.findIndex(
-        d => d === delegate.publicKey
-      )
-
-      delegate.forgingTime = delegateIndex * 8
-      delegate.isRoundDelegate = delegateIndex !== -1
-
-      return delegate
-    })
-
-    // Forging Status
-    const height = await block.height()
-    return { delegateCount: delegateCount,
-      delegates: delegatesRounds.map(delegate => {
-        delegate.forgingStatus = forging.status(
-          delegate,
-          height
-        )
-
-        return delegate
-      }) }
-      */
   }
 
   async forged() {
